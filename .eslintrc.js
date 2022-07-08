@@ -21,6 +21,7 @@ module.exports = {
         'react/require-default-props': 0,
         'react/function-component-definition': 'off',
         'react/jsx-props-no-spreading': 'off',
+        'import/no-extraneous-dependencies': 'off',
         'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
         'import/no-unresolved': 'off',
         'prettier/prettier': ['error', { endOfLine: 'auto', singleQuote: true, printWidth: 120, trailingComma: 'all' }],
