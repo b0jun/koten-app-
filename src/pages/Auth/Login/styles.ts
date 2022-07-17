@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
-import colors from '../../../styles/colors';
+import colors from '~/styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,14 +21,27 @@ const styles = StyleSheet.create({
     letterSpacing: -0.8,
     lineHeight: 23,
   },
-  inputTemp: {
+  inputText: {
     width: '100%',
     height: 56,
+    color: colors.Label,
+    fontSize: 15,
+  },
+  commonBorder: {
     borderBottomWidth: 1,
     borderBottomColor: colors.Grey200,
+    ...Platform.select({
+      ios: {
+        paddingBottom: 1,
+      },
+    }),
+  },
+  focusBorder: {
+    borderBottomWidth: 2,
+    borderBottomColor: colors.Secondary,
   },
   button: {
-    marginTop: 80,
+    marginTop: 32,
     width: '100%',
     height: 48,
     justifyContent: 'center',
@@ -59,6 +72,28 @@ const styles = StyleSheet.create({
     letterSpacing: -0.6,
     fontFamily: 'NotoSansKR-Regular',
     color: colors.Grey500,
+  },
+  formWrapper: {
+    width: '100%',
+    height: 160,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  errorText: {
+    marginTop: 4,
+    color: colors.Warning,
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  clearButton: {
+    position: 'absolute',
+    right: 8,
+  },
+  clearIcon: {
+    width: 24,
+    height: 24,
   },
 });
 

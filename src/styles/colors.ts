@@ -4,6 +4,7 @@ export default {
   Black: '#000000',
   White: '#FFFFFF',
   Warning: '#D12E29',
+  Label: '#333333',
 
   Grey100: '#0000001A', // 10%
   Grey200: '#00000033', // 20%
