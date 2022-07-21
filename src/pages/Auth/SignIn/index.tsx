@@ -7,6 +7,7 @@ import * as yup from 'yup';
 
 import styles from './styles';
 
+import { AuthStackNavigationProps } from '~/routes';
 import colors from '~/styles/colors';
 
 interface IFormData {
@@ -14,6 +15,10 @@ interface IFormData {
   password: string;
 }
 type inputType = 'email' | 'password';
+
+interface IProps {
+  navigation: AuthStackNavigationProps<'SignIn'>;
+}
 
 // TODO: TextInput HookForm 연결
 const schema = yup.object({
@@ -29,7 +34,7 @@ const schema = yup.object({
     .required('비밀번호를 입력해주세요.'),
 });
 
-const Login = () => {
+const SignIn = ({ navigation }: IProps) => {
   const {
     control,
     handleSubmit,
@@ -135,7 +140,15 @@ const Login = () => {
         />
         {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('SignUp');
+          // TODO: hook form으로 전환
+          // handleSubmit(onSubmit))
+        }}
+        activeOpacity={0.7}
+      >
         <Text style={styles.buttonText}>로그인</Text>
       </TouchableOpacity>
       <View style={styles.footer}>
@@ -150,4 +163,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;
