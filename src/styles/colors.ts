@@ -5,6 +5,8 @@ export default {
   White: '#FFFFFF',
   Warning: '#D12E29',
   Label: '#333333',
+  HeaderBorder: '#0000000F',
+  Disabled: '#F5F5F5',
 
   Grey100: '#0000001A', // 10%
   Grey200: '#00000033', // 20%
@@ -14,7 +16,6 @@ export default {
   Grey600: '#00000099', // 60%
   Grey700: '#000000B3', // 70%
   Grey800: '#000000CC', // 80%
-
   // Deposit
   D_Label_Main1: '#666666CC',
   D_Label_Sub1: '#6F6F6F',

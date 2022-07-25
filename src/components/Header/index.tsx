@@ -8,11 +8,16 @@ interface IProps {
   isBack: boolean;
   title: string;
   rightButton?: React.ReactElement;
+  isScrollTop?: boolean;
 }
-const Header = ({ isBack, title, rightButton }: IProps) => {
+const Header = ({ isBack, title, rightButton, isScrollTop }: IProps) => {
   const navigation = useNavigation();
+  const headerWrapperStyles = {
+    ...styles.wrapper,
+    borderBottomWidth: isScrollTop ? 0 : 1,
+  };
   return (
-    <View style={styles.wrapper}>
+    <View style={headerWrapperStyles}>
       <View style={styles.iconWrapper}>
         {isBack && (
           <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.goBack()}>

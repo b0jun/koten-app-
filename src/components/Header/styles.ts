@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: 16,
+    borderBottomColor: colors.HeaderBorder,
   },
   iconWrapper: {
     width: 24,
