@@ -5,15 +5,17 @@ import RNPickerSelect from 'react-native-picker-select';
 import { pickerSelectStyles, styles } from './styles';
 
 import globalStyles from '~/styles/globalStyles';
+import { IDepartment } from '~/types/dropdown';
 
 interface IProps {
   label: string;
   marginBottom: number;
   size?: 'normal' | 'small';
   setSelected: Dispatch<SetStateAction<string | null>>;
+  data: IDepartment[];
 }
 
-const Dropdown = ({ label, marginBottom = 0, size = 'normal', setSelected }: IProps) => {
+const Dropdown = ({ label, marginBottom = 0, size = 'normal', setSelected, data }: IProps) => {
   const dropdownWrapperStyles = {
     marginBottom,
   };
@@ -54,10 +56,7 @@ const Dropdown = ({ label, marginBottom = 0, size = 'normal', setSelected }: IPr
             value: null,
           }}
           onValueChange={(value) => setSelected(value)}
-          items={[
-            { label: '물류', value: '물류' },
-            { label: '회계', value: '회계' },
-          ]}
+          items={data}
           style={dropdownStyles}
         />
         <Image source={require('~/assets/icons/ic_expand_more.png')} style={iconStyles} />

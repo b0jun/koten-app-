@@ -11,8 +11,14 @@ import Button from '~/components/Button';
 import Dropdown from '~/components/Dropdown';
 import FormInput from '~/components/FormInput';
 import Header from '~/components/Header';
+import { AuthStackNavigationProps } from '~/routes';
 import globalStyles from '~/styles/globalStyles';
+import { IDepartment } from '~/types/dropdown';
 import { ISignUpData } from '~/types/formData';
+
+interface IProps {
+  navigation: AuthStackNavigationProps<'SignIn'>;
+}
 
 const schema = yup.object({
   name: yup.string().max(50).required('이름을 입력해주세요.'),
@@ -31,7 +37,12 @@ const schema = yup.object({
     .required('비밀번호를 입력해주세요.'),
 });
 
-const SignUp = () => {
+const dropdownData: IDepartment[] = [
+  { label: '물류', value: '물류' },
+  { label: '회계', value: '회계' },
+];
+
+const SignUp = ({ navigation }: IProps) => {
   const [isScrollTop, setIsScrollTop] = useState(true);
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -52,15 +63,14 @@ const SignUp = () => {
   const onSubmit = (data) => {
     console.log(data);
     console.log(selected);
+
+    navigation.navigate('SignUpCompleted');
   };
 
   const isValidSignUp = isValid && selected;
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={globalStyles.flexGrowWithWhite}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={globalStyles.flexGrow}>
       <SafeAreaView style={[globalStyles.flex]} edges={['top']}>
         <Header isBack title="회원가입" isScrollTop={isScrollTop} />
         <ScrollView
@@ -75,7 +85,7 @@ const SignUp = () => {
             setIsScrollTop(false);
           }}
         >
-          <Dropdown label="소속" marginBottom={20} setSelected={setSelected} />
+          <Dropdown label="소속" marginBottom={20} setSelected={setSelected} data={dropdownData} />
           <FormInput control={control} errors={errors} name="name" label="이름" placeholder="이름을 입력해주세요" />
           <FormInput
             control={control}
