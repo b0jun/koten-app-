@@ -29,7 +29,7 @@ const FormInput = <T extends FieldValues>({
 
   const textInputStyles = {
     ...styles.input,
-    borderColor: errorMessages ? colors.Warning : isFocus ? colors.Secondary : colors.Black,
+    borderColor: errorMessages ? colors.Warning : isFocus ? colors.Secondary : colors.Grey200,
     borderWidth: errorMessages || isFocus ? 2 : 1,
   };
 

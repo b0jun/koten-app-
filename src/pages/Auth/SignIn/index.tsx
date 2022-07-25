@@ -71,13 +71,13 @@ const SignIn = ({ navigation }: IProps) => {
 
   const emailInputStyle = {
     ...styles.inputText,
-    borderBottomColor: errorEmailMessages ? colors.Warning : focusInput.email ? colors.Secondary : colors.Black,
+    borderBottomColor: errorEmailMessages ? colors.Warning : focusInput.email ? colors.Secondary : colors.Grey200,
     borderBottomWidth: errorEmailMessages || focusInput.email ? 2 : 1,
   };
 
   const passwordInputStyle = {
     ...styles.inputText,
-    borderBottomColor: errorPasswordMessages ? colors.Warning : focusInput.password ? colors.Secondary : colors.Black,
+    borderBottomColor: errorPasswordMessages ? colors.Warning : focusInput.password ? colors.Secondary : colors.Grey200,
     borderBottomWidth: errorPasswordMessages || focusInput.password ? 2 : 1,
   };
 

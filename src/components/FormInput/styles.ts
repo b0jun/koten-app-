@@ -5,7 +5,7 @@ import colors from '~/styles/colors';
 const styles = StyleSheet.create({
   input: {
     width: '100%',
-    height: 56,
+    height: 48,
     color: colors.Label,
     fontSize: 15,
     paddingHorizontal: 16,
