@@ -26,19 +26,11 @@ const styles = StyleSheet.create({
     height: 56,
     color: colors.Label,
     fontSize: 15,
-  },
-  commonBorder: {
-    borderBottomWidth: 1,
-    borderBottomColor: colors.Grey200,
     ...Platform.select({
       ios: {
         paddingBottom: 1,
       },
     }),
-  },
-  focusBorder: {
-    borderBottomWidth: 2,
-    borderBottomColor: colors.Secondary,
   },
   button: {
     marginTop: 32,

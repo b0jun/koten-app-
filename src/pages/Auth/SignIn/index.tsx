@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, get, useForm } from 'react-hook-form';
 import { Image, TouchableOpacity, Text, TextInput, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as yup from 'yup';
@@ -20,18 +20,9 @@ interface IProps {
   navigation: AuthStackNavigationProps<'SignIn'>;
 }
 
-// TODO: TextInput HookForm 연결
 const schema = yup.object({
-  email: yup
-    .string()
-    .email('아이디(이메엘) 형식이 올바르지 않습니다.')
-    .max(50)
-    .required('아이디(이메일)을 입력해주세요.'),
-  password: yup
-    .string()
-    .min(8, '비밀번호를 8자 이상 ~ 15자 이하로 입력해주세요.')
-    .max(15, '비밀번호를 8자 이상 ~ 15자 이하로 입력해주세요.')
-    .required('비밀번호를 입력해주세요.'),
+  email: yup.string().email('아이디(이메일) 형식이 올바르지 않습니다.').max(50).required('아이디를 입력해주세요.'),
+  password: yup.string().required('비밀번호를 입력해주세요.'),
 });
 
 const SignIn = ({ navigation }: IProps) => {
@@ -44,6 +35,7 @@ const SignIn = ({ navigation }: IProps) => {
     setError,
   } = useForm<IFormData>({
     resolver: yupResolver(schema),
+    mode: 'onSubmit',
     defaultValues: {
       email: '',
       password: '',
@@ -74,8 +66,20 @@ const SignIn = ({ navigation }: IProps) => {
     });
   };
 
-  const emailInputStyle = focusInput.email ? styles.focusBorder : styles.commonBorder;
-  const passwordInputStyle = focusInput.password ? styles.focusBorder : styles.commonBorder;
+  const errorEmailMessages = get(errors, 'email')?.message;
+  const errorPasswordMessages = get(errors, 'password')?.message;
+
+  const emailInputStyle = {
+    ...styles.inputText,
+    borderBottomColor: errorEmailMessages ? colors.Warning : focusInput.email ? colors.Secondary : colors.Black,
+    borderBottomWidth: errorEmailMessages || focusInput.email ? 2 : 1,
+  };
+
+  const passwordInputStyle = {
+    ...styles.inputText,
+    borderBottomColor: errorPasswordMessages ? colors.Warning : focusInput.password ? colors.Secondary : colors.Black,
+    borderBottomWidth: errorPasswordMessages || focusInput.password ? 2 : 1,
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -93,6 +97,7 @@ const SignIn = ({ navigation }: IProps) => {
                 placeholder="이메일 입력"
                 autoCapitalize="none"
                 autoCorrect={false}
+                keyboardType="email-address"
                 placeholderTextColor={colors.Grey500}
                 onChangeText={(text) => {
                   clearErrors();
@@ -110,7 +115,7 @@ const SignIn = ({ navigation }: IProps) => {
           )}
         />
 
-        {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
+        {errorEmailMessages && <Text style={styles.errorText}>{errorEmailMessages}</Text>}
         <Controller
           control={control}
           name="password"
@@ -123,6 +128,8 @@ const SignIn = ({ navigation }: IProps) => {
                 autoCapitalize="none"
                 autoCorrect={false}
                 placeholderTextColor={colors.Grey500}
+                textContentType="oneTimeCode"
+                secureTextEntry
                 onChangeText={(text) => {
                   clearErrors();
                   onChange(text);
@@ -138,24 +145,16 @@ const SignIn = ({ navigation }: IProps) => {
             </View>
           )}
         />
-        {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
+        {errorPasswordMessages && <Text style={styles.errorText}>{errorPasswordMessages}</Text>}
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('SignUp');
-          // TODO: hook form으로 전환
-          // handleSubmit(onSubmit))
-        }}
-        activeOpacity={0.7}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)} activeOpacity={0.7}>
         <Text style={styles.buttonText}>로그인</Text>
       </TouchableOpacity>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.footerDivider} activeOpacity={0.7}>
           <Text style={styles.footerText}>비밀번호 재설정</Text>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.7}>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.footerText}>회원가입</Text>
         </TouchableOpacity>
       </View>
