@@ -1,13 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as yup from 'yup';
 
 import styles from './styles';
 
 import Button from '~/components/Button';
+import Dropdown from '~/components/Dropdown';
 import FormInput from '~/components/FormInput';
 import Header from '~/components/Header';
 import globalStyles from '~/styles/globalStyles';
@@ -31,6 +32,9 @@ const schema = yup.object({
 });
 
 const SignUp = () => {
+  const [isScrollTop, setIsScrollTop] = useState(true);
+  const [selected, setSelected] = useState<string | null>(null);
+
   const {
     control,
     handleSubmit,
@@ -47,9 +51,11 @@ const SignUp = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
+    console.log(selected);
   };
 
-  const [isScrollTop, setIsScrollTop] = useState(true);
+  const isValidSignUp = isValid && selected;
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -69,6 +75,7 @@ const SignUp = () => {
             setIsScrollTop(false);
           }}
         >
+          <Dropdown label="소속" marginBottom={20} setSelected={setSelected} />
           <FormInput control={control} errors={errors} name="name" label="이름" placeholder="이름을 입력해주세요" />
           <FormInput
             control={control}
@@ -98,7 +105,7 @@ const SignUp = () => {
           />
         </ScrollView>
         <View style={globalStyles.formButtonWrapper}>
-          <Button text="가입하기" onPress={handleSubmit(onSubmit)} disabled={!isValid} />
+          <Button text="가입하기" onPress={handleSubmit(onSubmit)} disabled={!isValidSignUp} />
         </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
