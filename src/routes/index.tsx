@@ -2,8 +2,10 @@ import { CompositeNavigationProp, NavigationContainer } from '@react-navigation/
 import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
+import PWResetCompleted from '~/pages/Auth/PWResetCompleted';
 import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
+import SignUpCompleted from '~/pages/Auth/SignUpCompleted';
 
 export type RootStackParamList = {
   AuthNavigator: undefined;
@@ -17,6 +19,8 @@ export type RootStackNavigationProps<T extends keyof RootStackParamList> = Nativ
 export type AuthNavigatorParamList = {
   SignIn: undefined;
   SignUp: undefined;
+  SignUpCompleted: undefined;
+  PWResetCompleted: undefined;
 };
 
 type NavigationProps<T extends keyof AuthNavigatorParamList> = NativeStackNavigationProp<AuthNavigatorParamList, T>;
@@ -34,6 +38,8 @@ const AuthNavigator = () => {
     <AuthStack.Navigator screenOptions={{ headerShown: false }}>
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
+      <AuthStack.Screen name="SignUpCompleted" component={SignUpCompleted} />
+      <AuthStack.Screen name="PWResetCompleted" component={PWResetCompleted} />
     </AuthStack.Navigator>
   );
 };

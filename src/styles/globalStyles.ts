@@ -5,8 +5,9 @@ import colors from './colors';
 const globalStyles = StyleSheet.create({
   flex: {
     flex: 1,
+    backgroundColor: 'white',
   },
-  flexGrowWithWhite: {
+  flexGrow: {
     flexGrow: 1,
     backgroundColor: 'white',
   },
