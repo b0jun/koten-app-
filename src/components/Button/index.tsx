@@ -8,7 +8,7 @@ import colors from '~/styles/colors';
 interface IProps {
   text: string;
   onPress: () => void;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 const Button = ({ text, onPress, disabled }: IProps) => {
