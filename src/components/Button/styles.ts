@@ -5,8 +5,6 @@ import colors from '~/styles/colors';
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    height: 56,
-    backgroundColor: colors.Primary,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',

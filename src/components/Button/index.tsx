@@ -9,12 +9,14 @@ interface IProps {
   text: string;
   onPress: () => void;
   disabled?: boolean;
+  size?: 'normal' | 'small';
 }
 
-const Button = ({ text, onPress, disabled }: IProps) => {
+const Button = ({ text, onPress, disabled, size = 'normal' }: IProps) => {
   const buttonStyles = {
     ...styles.button,
     backgroundColor: disabled ? '#F5f5F5' : colors.Primary,
+    height: size === 'normal' ? 56 : 48,
   };
   const buttonTextStyles = {
     ...styles.text,
