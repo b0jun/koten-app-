@@ -8,13 +8,13 @@ interface IProps {
   isBack: boolean;
   title: string;
   rightButton?: React.ReactElement;
-  isScrollTop?: boolean;
+  isBorder?: boolean;
 }
-const Header = ({ isBack, title, rightButton, isScrollTop }: IProps) => {
+const Header = ({ isBack, title, rightButton, isBorder }: IProps) => {
   const navigation = useNavigation();
   const headerWrapperStyles = {
     ...styles.wrapper,
-    borderBottomWidth: isScrollTop ? 0 : 1,
+    borderBottomWidth: isBorder ? 1 : 0,
   };
   return (
     <View style={headerWrapperStyles}>
