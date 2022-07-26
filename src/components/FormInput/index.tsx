@@ -13,6 +13,7 @@ type FormInputProps<T> = {
   label?: string;
   errors: FieldErrorsImpl<DeepRequired<T>>;
   last?: boolean;
+  isChain?: boolean;
 } & Omit<TextInputProps, 'name'>;
 
 const FormInput = <T extends FieldValues>({
@@ -21,12 +22,12 @@ const FormInput = <T extends FieldValues>({
   name,
   label,
   last,
+  isChain,
   ...textInputProps
 }: FormInputProps<T>) => {
   const [isFocus, setIsFocus] = useState(false);
 
   const errorMessages = get(errors, name)?.message;
-
   const textInputStyles = {
     ...styles.input,
     borderColor: errorMessages ? colors.Warning : isFocus ? colors.Secondary : colors.Grey200,
@@ -34,7 +35,7 @@ const FormInput = <T extends FieldValues>({
   };
 
   const formInputWrapperStyles = {
-    marginBottom: last ? 0 : name === 'password' ? 8 : 20,
+    marginBottom: last ? 0 : isChain ? 8 : 20,
   };
 
   return (
