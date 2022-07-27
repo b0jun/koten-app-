@@ -8,6 +8,7 @@ import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
 type FormInputProps<T> = {
+  inputRef?: any;
   control: Control<T>;
   name: Path<T>;
   label?: string;
@@ -17,6 +18,7 @@ type FormInputProps<T> = {
 } & Omit<TextInputProps, 'name'>;
 
 const FormInput = <T extends FieldValues>({
+  inputRef,
   control,
   errors,
   name,
@@ -47,6 +49,7 @@ const FormInput = <T extends FieldValues>({
         render={({ field: { onChange, value } }) => (
           <TextInput
             {...textInputProps}
+            ref={inputRef}
             style={textInputStyles}
             autoCapitalize="none"
             autoCorrect={false}

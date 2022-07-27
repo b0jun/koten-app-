@@ -1,16 +1,17 @@
 import { StyleSheet } from 'react-native';
 
+import colors from '~/styles/colors';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scrollView: {
-    flex: 1,
     paddingHorizontal: 16,
-    paddingTop: 24,
+    backgroundColor: colors.White,
   },
-  inner: {
-    marginBottom: 200,
+  contentWrapper: {
+    flex: 1,
+    justifyContent: 'space-between',
+    marginTop: 24,
   },
 });
 

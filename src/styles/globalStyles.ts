@@ -5,9 +5,15 @@ import colors from './colors';
 const globalStyles = StyleSheet.create({
   flex: {
     flex: 1,
-    backgroundColor: 'white',
+  },
+  flexWithBG: {
+    flex: 1,
+    backgroundColor: colors.White,
   },
   flexGrow: {
+    flexGrow: 1,
+  },
+  flexGrowWithBG: {
     flexGrow: 1,
     backgroundColor: 'white',
   },
@@ -20,6 +26,9 @@ const globalStyles = StyleSheet.create({
     marginBottom: 5,
   },
   formButtonWrapper: {
+    marginBottom: 20,
+  },
+  formButtonWrapperWithHorizontal: {
     marginBottom: 20,
     marginHorizontal: 16,
   },

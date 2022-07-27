@@ -49,6 +49,7 @@ const SignUp = ({ navigation }: IProps) => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm<ISignUpData>({
     resolver: yupResolver(schema),
@@ -64,15 +65,16 @@ const SignUp = ({ navigation }: IProps) => {
     console.log(data);
     console.log(selected);
 
+    reset();
     navigation.navigate('SignUpCompleted');
   };
 
   const isValidSignUp = isValid && selected;
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={globalStyles.flexGrow}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={globalStyles.flexGrowWithBG}>
       <SafeAreaView style={[globalStyles.flex]} edges={['top']}>
-        <Header isBack title="회원가입" isScrollTop={isScrollTop} />
+        <Header isBack title="회원가입" isBorder={!isScrollTop} />
         <ScrollView
           style={styles.scrollView}
           scrollEventThrottle={16}
@@ -85,36 +87,39 @@ const SignUp = ({ navigation }: IProps) => {
             setIsScrollTop(false);
           }}
         >
-          <Dropdown label="소속" marginBottom={20} setSelected={setSelected} data={dropdownData} />
-          <FormInput control={control} errors={errors} name="name" label="이름" placeholder="이름을 입력해주세요" />
-          <FormInput
-            control={control}
-            errors={errors}
-            name="email"
-            keyboardType="email-address"
-            label="아이디(이메일)"
-            placeholder="이메일을 입력해주세요"
-          />
-          <FormInput
-            control={control}
-            errors={errors}
-            name="password"
-            label="비밀번호"
-            placeholder="영문+숫자 조합 8자 이상"
-            textContentType="oneTimeCode"
-            secureTextEntry
-          />
-          <FormInput
-            control={control}
-            errors={errors}
-            name="passwordConfirm"
-            placeholder="비밀번호를 한번 더 입력해주세요"
-            textContentType="oneTimeCode"
-            secureTextEntry
-            last
-          />
+          <View style={styles.inner}>
+            <Dropdown label="소속" marginBottom={20} setSelected={setSelected} data={dropdownData} />
+            <FormInput control={control} errors={errors} name="name" label="이름" placeholder="이름을 입력해주세요" />
+            <FormInput
+              control={control}
+              errors={errors}
+              name="email"
+              keyboardType="email-address"
+              label="아이디(이메일)"
+              placeholder="이메일을 입력해주세요"
+            />
+            <FormInput
+              control={control}
+              errors={errors}
+              name="password"
+              label="비밀번호"
+              placeholder="영문+숫자 조합 8자 이상"
+              textContentType="oneTimeCode"
+              secureTextEntry
+              isChain
+            />
+            <FormInput
+              control={control}
+              errors={errors}
+              name="passwordConfirm"
+              placeholder="비밀번호를 한번 더 입력해주세요"
+              textContentType="oneTimeCode"
+              secureTextEntry
+              last
+            />
+          </View>
         </ScrollView>
-        <View style={globalStyles.formButtonWrapper}>
+        <View style={globalStyles.formButtonWrapperWithHorizontal}>
           <Button text="가입하기" onPress={handleSubmit(onSubmit)} disabled={!isValidSignUp} />
         </View>
       </SafeAreaView>

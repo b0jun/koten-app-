@@ -13,9 +13,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonWrapper: {
-    marginBottom: 20,
-  },
   logo: {
     width: 230,
     height: 34,

@@ -5,6 +5,7 @@ import { Image, Text, View } from 'react-native';
 import styles from './styles';
 
 import Button from '~/components/Button';
+import globalStyles from '~/styles/globalStyles';
 
 interface IProps {
   title: string;
@@ -24,7 +25,7 @@ const AuthCompleted = ({ title, description }: IProps) => {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
-      <View style={styles.buttonWrapper}>
+      <View style={globalStyles.formButtonWrapper}>
         <Button text="로그인하기" onPress={() => navigation.navigate('SignIn')} />
       </View>
     </View>

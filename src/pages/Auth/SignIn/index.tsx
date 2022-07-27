@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useState } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import { Controller, get, useForm } from 'react-hook-form';
 import { Image, TouchableOpacity, Text, TextInput, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -32,7 +33,7 @@ const SignIn = ({ navigation }: IProps) => {
     formState: { errors },
     clearErrors,
     resetField,
-    setError,
+    reset,
   } = useForm<IFormData>({
     resolver: yupResolver(schema),
     mode: 'onSubmit',
@@ -41,6 +42,11 @@ const SignIn = ({ navigation }: IProps) => {
       password: '',
     },
   });
+
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    if (isFocused) reset();
+  }, [isFocused, reset]);
 
   const resetInputValue = (type: inputType) => {
     resetField(type);
@@ -151,7 +157,11 @@ const SignIn = ({ navigation }: IProps) => {
         <Text style={styles.buttonText}>로그인</Text>
       </TouchableOpacity>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerDivider} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.footerDivider}
+          activeOpacity={0.7}
+          onPress={() => navigation.navigate('PWResetEmailVerify')}
+        >
           <Text style={styles.footerText}>비밀번호 재설정</Text>
         </TouchableOpacity>
         <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('SignUp')}>

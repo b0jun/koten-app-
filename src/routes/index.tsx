@@ -3,6 +3,8 @@ import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-na
 import React from 'react';
 
 import PWResetCompleted from '~/pages/Auth/PWResetCompleted';
+import PWResetEmailVerify from '~/pages/Auth/PWResetEmailVerify';
+import PWResetMain from '~/pages/Auth/PWResetMain';
 import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
 import SignUpCompleted from '~/pages/Auth/SignUpCompleted';
@@ -21,6 +23,8 @@ export type AuthNavigatorParamList = {
   SignUp: undefined;
   SignUpCompleted: undefined;
   PWResetCompleted: undefined;
+  PWResetEmailVerify: undefined;
+  PWResetMain: undefined;
 };
 
 type NavigationProps<T extends keyof AuthNavigatorParamList> = NativeStackNavigationProp<AuthNavigatorParamList, T>;
@@ -39,6 +43,8 @@ const AuthNavigator = () => {
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="SignUpCompleted" component={SignUpCompleted} />
+      <AuthStack.Screen name="PWResetEmailVerify" component={PWResetEmailVerify} />
+      <AuthStack.Screen name="PWResetMain" component={PWResetMain} />
       <AuthStack.Screen name="PWResetCompleted" component={PWResetCompleted} />
     </AuthStack.Navigator>
   );
