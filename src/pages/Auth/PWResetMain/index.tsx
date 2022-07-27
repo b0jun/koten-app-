@@ -10,7 +10,7 @@ import styles from './styles';
 import Button from '~/components/Button';
 import FormInput from '~/components/FormInput';
 import Header from '~/components/Header';
-import { AuthStackNavigationProps } from '~/routes';
+import { AuthStackNavigationProps } from '~/routes/types';
 import globalStyles from '~/styles/globalStyles';
 import { IPassword } from '~/types/formData';
 

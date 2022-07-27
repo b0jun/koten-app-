@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useEffect, useRef, useState } from 'react';
-import { get, useForm } from 'react-hook-form';
+import React, { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as yup from 'yup';
@@ -11,7 +11,7 @@ import Button from '~/components/Button';
 import FormInput from '~/components/FormInput';
 import Header from '~/components/Header';
 import useBackgroundInterval from '~/hooks/common/useBackgroundInterval';
-import { AuthStackNavigationProps } from '~/routes';
+import { AuthStackNavigationProps } from '~/routes/types';
 import globalStyles from '~/styles/globalStyles';
 import { IEmail, ICode } from '~/types/formData';
 import { convertStoM } from '~/utils/common';

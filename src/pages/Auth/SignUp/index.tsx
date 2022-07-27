@@ -11,7 +11,7 @@ import Button from '~/components/Button';
 import Dropdown from '~/components/Dropdown';
 import FormInput from '~/components/FormInput';
 import Header from '~/components/Header';
-import { AuthStackNavigationProps } from '~/routes';
+import { AuthStackNavigationProps } from '~/routes/types';
 import globalStyles from '~/styles/globalStyles';
 import { IDepartment } from '~/types/dropdown';
 import { ISignUpData } from '~/types/formData';

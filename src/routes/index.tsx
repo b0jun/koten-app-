@@ -1,6 +1,18 @@
-import { CompositeNavigationProp, NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { ComponentType } from 'react';
+import { Image, ImageSourcePropType } from 'react-native';
+
+import styles from './styles';
+import {
+  AuthNavigatorParamList,
+  IMainTabImageProps,
+  ITabList,
+  MainNavigatorParamList,
+  MainTabParamList,
+  RootStackParamList,
+} from './types';
 
 import PWResetCompleted from '~/pages/Auth/PWResetCompleted';
 import PWResetEmailVerify from '~/pages/Auth/PWResetEmailVerify';
@@ -8,34 +20,16 @@ import PWResetMain from '~/pages/Auth/PWResetMain';
 import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
 import SignUpCompleted from '~/pages/Auth/SignUpCompleted';
-
-export type RootStackParamList = {
-  AuthNavigator: undefined;
-  MainNavigator: undefined;
-};
-export type RootStackNavigationProps<T extends keyof RootStackParamList> = NativeStackNavigationProp<
-  RootStackParamList,
-  T
->;
-
-export type AuthNavigatorParamList = {
-  SignIn: undefined;
-  SignUp: undefined;
-  SignUpCompleted: undefined;
-  PWResetCompleted: undefined;
-  PWResetEmailVerify: undefined;
-  PWResetMain: undefined;
-};
-
-type NavigationProps<T extends keyof AuthNavigatorParamList> = NativeStackNavigationProp<AuthNavigatorParamList, T>;
-
-export type AuthStackNavigationProps<T extends keyof AuthNavigatorParamList> = CompositeNavigationProp<
-  NavigationProps<T>,
-  RootStackNavigationProps<'AuthNavigator'>
->;
+import Home from '~/pages/Home';
+import InventoryStatus from '~/pages/InventoryStatus';
+import MyPage from '~/pages/MyPage';
+import RepairHistory from '~/pages/RepairHistory';
+import colors from '~/styles/colors';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const AuthStack = createNativeStackNavigator<AuthNavigatorParamList>();
+const MainStack = createNativeStackNavigator<MainNavigatorParamList>();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
 const AuthNavigator = () => {
   return (
@@ -50,11 +44,95 @@ const AuthNavigator = () => {
   );
 };
 
+const tabList: ITabList[] = [
+  {
+    name: 'Home',
+    component: Home,
+    tabBarLabel: '홈',
+    icon: require('~/assets/icons/ic_navi_home.png'),
+    icon_focused: require('~/assets/icons/ic_navi_home_y.png'),
+  },
+  {
+    name: 'InventoryStatus',
+    component: InventoryStatus,
+    tabBarLabel: '재고현황',
+    icon: require('~/assets/icons/ic_navi_box.png'),
+    icon_focused: require('~/assets/icons/ic_navi_box_y.png'),
+  },
+  {
+    name: 'RepairHistory',
+    component: RepairHistory,
+    tabBarLabel: '수리내역',
+    icon: require('~/assets/icons/ic_navi_list.png'),
+    icon_focused: require('~/assets/icons/ic_navi_list_y.png'),
+  },
+  {
+    name: 'MyPage',
+    component: MyPage,
+    tabBarLabel: '마이페이지',
+    icon: require('~/assets/icons/ic_navi_user.png'),
+    icon_focused: require('~/assets/icons/ic_navi_user_y.png'),
+  },
+];
+
+const MainTab = () => {
+  const MemoizedNestedComponent = React.useCallback(
+    (props: IMainTabImageProps) => (
+      <Image source={props.focused ? props.icon_focused : props.icon} style={styles.icon} />
+    ),
+    [],
+  );
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarLabelStyle: {
+          fontSize: 10,
+          lineHeight: 12,
+          margin: 0,
+          marginBottom: 3,
+          padding: 0,
+        },
+        tabBarIconStyle: {
+          width: 24,
+          height: 24,
+          marginTop: 4,
+        },
+        tabBarActiveTintColor: colors.Secondary,
+        tabBarInactiveTintColor: colors.Grey600,
+      }}
+    >
+      {tabList.map(({ name, component, tabBarLabel, icon, icon_focused }) => (
+        <Tab.Screen
+          key={tabBarLabel}
+          name={name}
+          component={component}
+          options={{
+            tabBarLabel,
+            tabBarIcon: ({ focused }) => {
+              return MemoizedNestedComponent({ focused, icon, icon_focused });
+            },
+          }}
+        />
+      ))}
+    </Tab.Navigator>
+  );
+};
+
+const MainNavigator = () => {
+  return (
+    <MainStack.Navigator screenOptions={{ headerShown: false }}>
+      <MainStack.Screen name="MainTab" component={MainTab} />
+    </MainStack.Navigator>
+  );
+};
 const AppRouter = () => {
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen name="AuthNavigator" component={AuthNavigator} />
+        {/* <RootStack.Screen name="AuthNavigator" component={AuthNavigator} /> */}
+        <RootStack.Screen name="MainNavigator" component={MainNavigator} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

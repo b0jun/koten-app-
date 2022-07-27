@@ -8,7 +8,7 @@ import * as yup from 'yup';
 
 import styles from './styles';
 
-import { AuthStackNavigationProps } from '~/routes';
+import { AuthStackNavigationProps } from '~/routes/types';
 import colors from '~/styles/colors';
 
 interface IFormData {
