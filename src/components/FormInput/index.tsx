@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Control, Controller, DeepRequired, FieldErrorsImpl, FieldValues, get, Path } from 'react-hook-form';
+import React, { useState } from 'react';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 
 import styles from './styles';
@@ -8,19 +8,19 @@ import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
 type FormInputProps<T> = {
-  inputRef?: any;
+  inputRef?: React.RefObject<TextInput>;
   control: Control<T>;
   name: Path<T>;
   label?: string;
-  errors: FieldErrorsImpl<DeepRequired<T>>;
+  error: string | undefined;
   last?: boolean;
   isChain?: boolean;
-} & Omit<TextInputProps, 'name'>;
+} & TextInputProps;
 
 const FormInput = <T extends FieldValues>({
   inputRef,
   control,
-  errors,
+  error,
   name,
   label,
   last,
@@ -29,11 +29,10 @@ const FormInput = <T extends FieldValues>({
 }: FormInputProps<T>) => {
   const [isFocus, setIsFocus] = useState(false);
 
-  const errorMessages = get(errors, name)?.message;
   const textInputStyles = {
     ...styles.input,
-    borderColor: errorMessages ? colors.Warning : isFocus ? colors.Secondary : colors.Grey200,
-    borderWidth: errorMessages || isFocus ? 2 : 1,
+    borderColor: error ? colors.Warning : isFocus ? colors.Secondary : colors.Grey200,
+    borderWidth: error || isFocus ? 2 : 1,
   };
 
   const formInputWrapperStyles = {
@@ -63,7 +62,7 @@ const FormInput = <T extends FieldValues>({
           />
         )}
       />
-      {errorMessages && <Text style={styles.errorText}>{errorMessages}</Text>}
+      {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
 };

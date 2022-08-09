@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { ComponentType } from 'react';
-import { Image, ImageSourcePropType } from 'react-native';
+import React from 'react';
+import { Image } from 'react-native';
 
 import styles from './styles';
 import {
@@ -20,10 +20,10 @@ import PWResetMain from '~/pages/Auth/PWResetMain';
 import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
 import SignUpCompleted from '~/pages/Auth/SignUpCompleted';
-import Home from '~/pages/Home';
-import InventoryStatus from '~/pages/InventoryStatus';
-import MyPage from '~/pages/MyPage';
-import RepairHistory from '~/pages/RepairHistory';
+import Home from '~/pages/Tabs/Home';
+import InventoryStatus from '~/pages/Tabs/InventoryStatus';
+import MyPage from '~/pages/Tabs/MyPage';
+import RepairHistory from '~/pages/Tabs/RepairHistory';
 import colors from '~/styles/colors';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();

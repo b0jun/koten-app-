@@ -54,7 +54,7 @@ const PWResetMain = ({ navigation }: IProps) => {
         <View>
           <FormInput
             control={control}
-            errors={errors}
+            error={errors.password?.message}
             name="password"
             label="비밀번호"
             placeholder="영문+숫자 조합 8자 이상"
@@ -64,7 +64,7 @@ const PWResetMain = ({ navigation }: IProps) => {
           />
           <FormInput
             control={control}
-            errors={errors}
+            error={errors.passwordConfirm?.message}
             name="passwordConfirm"
             placeholder="비밀번호를 한번 더 입력해주세요"
             textContentType="oneTimeCode"

@@ -6,7 +6,9 @@ export default {
   Warning: '#D12E29',
   Label: '#333333',
   HeaderBorder: '#0000000F',
+  HomeHeaderBorder: '#00000014',
   Disabled: '#F5F5F5',
+  DashboardSub: '#ffffff66',
 
   Grey100: '#0000001A', // 10%
   Grey200: '#00000033', // 20%
@@ -16,19 +18,37 @@ export default {
   Grey600: '#00000099', // 60%
   Grey700: '#000000B3', // 70%
   Grey800: '#000000CC', // 80%
+
+  // [Label]
+  // Delivery
+  DeliveryLabelA_Main: '#3A96FF14',
+  DeliveryLabelA_Sub: '#3A96FF',
+  DeliveryLabelB_Main: '#EBBF3A14',
+  DeliveryLabelB_Sub: '#FCC212',
+  DeliveryLabelC_Main: '#66666614',
+  DeliveryLabelC_Sub: '#666666',
+
   // Deposit
-  D_Label_Main1: '#666666CC',
-  D_Label_Sub1: '#6F6F6F',
-  D_Label_Main2: '#3A96FFCC',
-  D_Label_Sub2: '#1B82F8',
-  D_Label_Main3: '#F42A24CC',
-  D_Label_Sub3: '#D11610',
+  DepositLabelA_Main: '#3A96FFCC',
+  DepositLabelA_Sub: '#1B82F8',
+  DepositLabelB_Main: '#F42A24CC',
+  DepositLabelB_Sub: '#D11610',
+  DepositLabelC_Main: '#848484',
+  DepositLabelC_Sub: '#6F6F6F',
+
+  // Repair
+  RepairLabelA_Main: '#1B1C1B',
+  RepairLabelB_Main: '#FCC212',
 
   // Request
-  R_Label_Main1: '#66666614',
-  R_Label_Sub1: '#666666',
-  R_Label_Main2: '#EBBF3A14',
-  R_Label_Sub2: '#FCC212',
-  R_Label_Main3: '#D12E2914',
-  R_Label_Sub3: '#D12E29',
+  RequestLabelA_Main: '#EBBF3A14',
+  RequestLabelA_Sub: '#FCC212',
+  RequestLabelB_Main: '#66666614',
+  RequestLabelB_Sub: '#666666',
+  RequestLabelC_Main: '#D12E2914',
+  RequestLabelC_Sub: '#D12E29',
+
+  DashboardTop: '#2F2F2F',
+  DashboardBottom: '#101010',
+  DashboardBorder: '#ffffff33',
 };

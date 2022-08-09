@@ -89,10 +89,16 @@ const SignUp = ({ navigation }: IProps) => {
         >
           <View style={styles.inner}>
             <Dropdown label="소속" marginBottom={20} setSelected={setSelected} data={dropdownData} />
-            <FormInput control={control} errors={errors} name="name" label="이름" placeholder="이름을 입력해주세요" />
             <FormInput
               control={control}
-              errors={errors}
+              error={errors.name?.message}
+              name="name"
+              label="이름"
+              placeholder="이름을 입력해주세요"
+            />
+            <FormInput
+              control={control}
+              error={errors.email?.message}
               name="email"
               keyboardType="email-address"
               label="아이디(이메일)"
@@ -100,7 +106,7 @@ const SignUp = ({ navigation }: IProps) => {
             />
             <FormInput
               control={control}
-              errors={errors}
+              error={errors.password?.message}
               name="password"
               label="비밀번호"
               placeholder="영문+숫자 조합 8자 이상"
@@ -110,7 +116,7 @@ const SignUp = ({ navigation }: IProps) => {
             />
             <FormInput
               control={control}
-              errors={errors}
+              error={errors.passwordConfirm?.message}
               name="passwordConfirm"
               placeholder="비밀번호를 한번 더 입력해주세요"
               textContentType="oneTimeCode"

@@ -114,7 +114,7 @@ const PWResetEmailVerify = ({ navigation }: IProps) => {
             <View style={globalStyles.flex}>
               <FormInput
                 control={emailControl}
-                errors={emailErrors}
+                error={emailErrors.email?.message}
                 name="email"
                 keyboardType="email-address"
                 placeholder="이메일을 입력해주세요"
@@ -136,7 +136,7 @@ const PWResetEmailVerify = ({ navigation }: IProps) => {
               <FormInput
                 inputRef={codeRef}
                 control={codeControl}
-                errors={codeErrors}
+                error={codeErrors.code?.message}
                 name="code"
                 keyboardType="number-pad"
                 placeholder="인증번호 입력"

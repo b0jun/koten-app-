@@ -17,6 +17,9 @@ const globalStyles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: 'white',
   },
+  row: {
+    flexDirection: 'row',
+  },
   label: {
     fontFamily: 'NotoSansKR-Bold',
     fontSize: 12,
