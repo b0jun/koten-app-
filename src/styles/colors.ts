@@ -10,6 +10,10 @@ export default {
   Disabled: '#F5F5F5',
   DashboardSub: '#ffffff66',
 
+  White200: '#FFFFFF33', // 20%,
+  White800: '#FFFFFFCC',
+
+  Grey50: '#0000000d', // 5%
   Grey100: '#0000001A', // 10%
   Grey200: '#00000033', // 20%
   Grey300: '#0000004D', // 30%

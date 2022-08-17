@@ -20,9 +20,6 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
-  rightWrapper: {
-    flexDirection: 'row',
-  },
   iconWrapper: {
     padding: 2,
   },

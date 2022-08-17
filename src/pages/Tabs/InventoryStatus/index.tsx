@@ -1,10 +1,11 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableHighlight } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import styles from './styles';
 
 import Header from '~/components/Header';
+import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
 const dummyInventory = [
@@ -124,17 +125,23 @@ const InventoryStatus = () => {
       <ScrollView style={globalStyles.flex}>
         {dummyInventory.map(({ id, office, product, stock }) => (
           <View key={id}>
-            <TouchableOpacity style={styles.body} activeOpacity={0.6}>
-              <Text style={[styles.bodyText, styles.first]} numberOfLines={1}>
-                {office}
-              </Text>
-              <Text style={[styles.bodyText, styles.second]} numberOfLines={1}>
-                {product}
-              </Text>
-              <Text style={[styles.bodyText, styles.third]} numberOfLines={1}>
-                {stock}개
-              </Text>
-            </TouchableOpacity>
+            <TouchableHighlight
+              style={styles.body}
+              underlayColor={colors.HeaderBorder}
+              onPress={() => console.log('C')}
+            >
+              <>
+                <Text style={[styles.bodyText, styles.first]} numberOfLines={1}>
+                  {office}
+                </Text>
+                <Text style={[styles.bodyText, styles.second]} numberOfLines={1}>
+                  {product}
+                </Text>
+                <Text style={[styles.bodyText, styles.third]} numberOfLines={1}>
+                  {stock}개
+                </Text>
+              </>
+            </TouchableHighlight>
             <View style={styles.bodyBorder} />
           </View>
         ))}

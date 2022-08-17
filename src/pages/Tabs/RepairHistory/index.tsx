@@ -1,10 +1,11 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableHighlight } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import styles from './styles';
 
 import Header from '~/components/Header';
+import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
 const dummyRepair = [
@@ -104,6 +105,18 @@ const dummyRepair = [
     serialNumber: 'KO603125-01',
     product: '코텐 미니레이저 레벨기',
   },
+  {
+    id: 17,
+    customer: '(주)안전제일',
+    serialNumber: 'KO603125-01',
+    product: '코텐 미니레이저 레벨기',
+  },
+  {
+    id: 18,
+    customer: '(주)안전제일',
+    serialNumber: 'KO603125-01',
+    product: '코텐 미니레이저 레벨기',
+  },
 ];
 
 const RepairHistory = () => {
@@ -118,17 +131,23 @@ const RepairHistory = () => {
       <ScrollView style={globalStyles.flex}>
         {dummyRepair.map(({ id, customer, serialNumber, product }) => (
           <View key={id}>
-            <TouchableOpacity style={styles.body} activeOpacity={0.6}>
-              <Text style={[styles.bodyText, styles.first]} numberOfLines={1}>
-                {customer}
-              </Text>
-              <Text style={[styles.bodyText, styles.second]} numberOfLines={1}>
-                {serialNumber}
-              </Text>
-              <Text style={[styles.bodyText, styles.third]} numberOfLines={1}>
-                {product}
-              </Text>
-            </TouchableOpacity>
+            <TouchableHighlight
+              style={styles.body}
+              underlayColor={colors.HeaderBorder}
+              onPress={() => console.log('C')}
+            >
+              <>
+                <Text style={[styles.bodyText, styles.first]} numberOfLines={1}>
+                  {customer}
+                </Text>
+                <Text style={[styles.bodyText, styles.second]} numberOfLines={1}>
+                  {serialNumber}
+                </Text>
+                <Text style={[styles.bodyText, styles.third]} numberOfLines={1}>
+                  {product}
+                </Text>
+              </>
+            </TouchableHighlight>
             <View style={styles.bodyBorder} />
           </View>
         ))}
