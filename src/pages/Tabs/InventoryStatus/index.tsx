@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, View, Text, TouchableHighlight } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import styles from './styles';
 
 import Header from '~/components/Header';
+import ModalWrapper from '~/components/ModalWrapper';
+import { CommonTable, SumTable } from '~/components/Table';
 import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
@@ -114,6 +116,10 @@ const dummyInventory = [
 ];
 
 const InventoryStatus = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const togglePopup = () => {
+    setIsOpenModal((prev) => !prev);
+  };
   return (
     <SafeAreaView edges={['top']} style={globalStyles.flexWithBG}>
       <Header isBack title="재고현황" type="search" isBorder onPressIcon={() => console.log('TEMP')} />
@@ -125,11 +131,7 @@ const InventoryStatus = () => {
       <ScrollView style={globalStyles.flex}>
         {dummyInventory.map(({ id, office, product, stock }) => (
           <View key={id}>
-            <TouchableHighlight
-              style={styles.body}
-              underlayColor={colors.HeaderBorder}
-              onPress={() => console.log('C')}
-            >
+            <TouchableHighlight style={styles.body} underlayColor={colors.HeaderBorder} onPress={togglePopup}>
               <>
                 <Text style={[styles.bodyText, styles.first]} numberOfLines={1}>
                   {office}
@@ -146,6 +148,12 @@ const InventoryStatus = () => {
           </View>
         ))}
       </ScrollView>
+      {isOpenModal && (
+        <ModalWrapper title="제품 상세정보" visible={isOpenModal} closeModal={togglePopup}>
+          <CommonTable />
+          <SumTable />
+        </ModalWrapper>
+      )}
     </SafeAreaView>
   );
 };
