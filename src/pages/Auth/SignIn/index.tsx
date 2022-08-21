@@ -88,7 +88,7 @@ const SignIn = ({ navigation }: IProps) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <Image source={require('~/assets/images/logo.png')} style={styles.logo} />
       <Text style={styles.logoCaption}>AS관리 서비스</Text>
       <View style={styles.formWrapper}>

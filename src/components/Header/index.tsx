@@ -5,7 +5,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
 interface IProps {
-  isBack: boolean;
+  isBack?: boolean;
   title: string;
   type?: 'common' | 'search' | 'close';
   isBorder?: boolean;

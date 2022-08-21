@@ -27,6 +27,7 @@ export type MainTabParamList = {
 export type MainNavigatorParamList = {
   MainTab: undefined;
   ModifyUserInfo: undefined;
+  RepairHistoryDetail: undefined;
 };
 
 export type RootStackNavigationProps<T extends keyof RootStackParamList> = NativeStackNavigationProp<

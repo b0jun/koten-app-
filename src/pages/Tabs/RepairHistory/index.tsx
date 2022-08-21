@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 
 import Header from '~/components/Header';
+import { MainStackNavigationProps } from '~/routes/types';
 import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
@@ -119,7 +120,11 @@ const dummyRepair = [
   },
 ];
 
-const RepairHistory = () => {
+interface IProps {
+  navigation?: MainStackNavigationProps<'RepairHistoryDetail'>;
+}
+
+const RepairHistory = ({ navigation }: IProps) => {
   return (
     <SafeAreaView edges={['top']} style={globalStyles.flexWithBG}>
       <Header isBack title="수리내역" type="search" isBorder onPressIcon={() => console.log('TEMP')} />
@@ -134,7 +139,7 @@ const RepairHistory = () => {
             <TouchableHighlight
               style={styles.body}
               underlayColor={colors.HeaderBorder}
-              onPress={() => console.log('C')}
+              onPress={() => navigation?.navigate('RepairHistoryDetail')}
             >
               <>
                 <Text style={[styles.bodyText, styles.first]} numberOfLines={1}>
