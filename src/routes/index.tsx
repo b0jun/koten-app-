@@ -21,6 +21,7 @@ import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
 import SignUpCompleted from '~/pages/Auth/SignUpCompleted';
 import ModifyUserInfo from '~/pages/ModifyUserInfo';
+import Notification from '~/pages/Notification';
 import RepairHistoryDetail from '~/pages/RepairHistoryDetail';
 import Home from '~/pages/Tabs/Home';
 import InventoryStatus from '~/pages/Tabs/InventoryStatus';
@@ -128,6 +129,7 @@ const MainNavigator = () => {
       <MainStack.Screen name="MainTab" component={MainTab} />
       <MainStack.Screen name="ModifyUserInfo" component={ModifyUserInfo} />
       <MainStack.Screen name="RepairHistoryDetail" component={RepairHistoryDetail} />
+      <MainStack.Screen name="Notification" component={Notification} />
     </MainStack.Navigator>
   );
 };

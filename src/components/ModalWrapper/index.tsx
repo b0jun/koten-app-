@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Text, TouchableOpacity, View } from 'react-native';
+import { Modal, Text, View } from 'react-native';
 
 import Button from '../Button';
 
@@ -8,13 +8,12 @@ import styles from './styles';
 interface IProps {
   title: string;
   children: React.ReactNode;
-  visible: boolean;
   closeModal: () => void;
 }
 
-const ModalWrapper = ({ title, children, visible, closeModal }: IProps) => {
+const ModalWrapper = ({ title, children, closeModal }: IProps) => {
   return (
-    <Modal animationType="fade" transparent={true} visible={visible}>
+    <Modal animationType="fade" transparent={true} visible={true}>
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <Text style={styles.title}>{title}</Text>

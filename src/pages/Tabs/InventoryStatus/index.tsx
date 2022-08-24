@@ -149,7 +149,7 @@ const InventoryStatus = () => {
         ))}
       </ScrollView>
       {isOpenModal && (
-        <ModalWrapper title="제품 상세정보" visible={isOpenModal} closeModal={togglePopup}>
+        <ModalWrapper title="제품 상세정보" closeModal={togglePopup}>
           <CommonTable />
           <SumTable />
         </ModalWrapper>

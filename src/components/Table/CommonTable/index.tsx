@@ -5,6 +5,7 @@ import styles from '../styles';
 
 import colors from '~/styles/colors';
 
+// TODO: API 값에 따라 CommonTable Props 수정
 const tableData = {
   type: 'common',
   title: '제품정보',

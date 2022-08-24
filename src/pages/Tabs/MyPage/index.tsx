@@ -1,12 +1,21 @@
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { ScrollView, Text, View, SafeAreaView, Image, StatusBar, TouchableOpacity } from 'react-native';
 
 import Option from './Option';
 import styles from './styles';
 
+import { MainNavigatorParamList } from '~/routes/types';
 import globalStyles from '~/styles/globalStyles';
 
 const MyPage = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<MainNavigatorParamList>>();
+
+  const goToPage = () => {
+    navigation.navigate('Notification');
+  };
+
   const defaultOptions = [
     {
       title: '거래처 관리',
@@ -84,7 +93,7 @@ const MyPage = () => {
               <Text style={styles.email}>koten@naver.com</Text>
             </View>
           </View>
-          <TouchableOpacity activeOpacity={0.7}>
+          <TouchableOpacity activeOpacity={0.7} onPress={goToPage}>
             <Image source={require('~/assets/icons/ic_push_w.png')} style={styles.pushIcon} />
           </TouchableOpacity>
         </View>
