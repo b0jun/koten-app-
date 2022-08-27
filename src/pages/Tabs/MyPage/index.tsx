@@ -27,7 +27,7 @@ const MyPage = () => {
     },
     {
       title: '출고 관리',
-      page: '',
+      page: 'ReleaseManagement',
     },
   ];
 
