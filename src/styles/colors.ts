@@ -44,13 +44,13 @@ export default {
   RepairLabelA_Main: '#1B1C1B',
   RepairLabelB_Main: '#FCC212',
 
-  // Request
-  RequestLabelA_Main: '#EBBF3A14',
-  RequestLabelA_Sub: '#FCC212',
-  RequestLabelB_Main: '#66666614',
-  RequestLabelB_Sub: '#666666',
-  RequestLabelC_Main: '#D12E2914',
-  RequestLabelC_Sub: '#D12E29',
+  // Release
+  ReleaseLabelA_Main: '#EBBF3A14',
+  ReleaseLabelA_Sub: '#FCC212',
+  ReleaseLabelB_Main: '#66666614',
+  ReleaseLabelB_Sub: '#666666',
+  ReleaseLabelC_Main: '#D12E2914',
+  ReleaseLabelC_Sub: '#D12E29',
 
   DashboardTop: '#2F2F2F',
   DashboardBottom: '#101010',

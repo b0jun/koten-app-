@@ -19,18 +19,18 @@ import colors from '~/styles/colors';
 // 후 정산 depositB
 // 입급완료 depositC
 
-// [Request status]
-// 출고요청 requestA
-// 출고완료 requestB
-// 출고취소 requestC
+// [Release status]
+// 출고요청 releaseA
+// 출고완료 releaseB
+// 출고취소 releaseC
 
-type DeliveryType = 'deliveryA' | 'deliveryB' | 'deliveryC';
-type RepairType = 'repairA' | 'repairB';
-type DepositType = 'depositA' | 'depositB' | 'depositC';
-type requestType = 'requestA' | 'requestB' | 'requestC';
+export type DeliveryType = 'deliveryA' | 'deliveryB' | 'deliveryC';
+export type RepairType = 'repairA' | 'repairB';
+export type DepositType = 'depositA' | 'depositB' | 'depositC';
+export type ReleaseType = 'releaseA' | 'releaseB' | 'releaseC';
 
 interface IProps {
-  type: DeliveryType | RepairType | DepositType | requestType;
+  type: DeliveryType | RepairType | DepositType | ReleaseType;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,37 +86,37 @@ const labelList: any = {
       color: colors.White,
     },
   },
-  requestA: {
+  releaseA: {
     text: '출고요청',
     boxStyles: {
-      backgroundColor: colors.RequestLabelA_Main,
+      backgroundColor: colors.ReleaseLabelA_Main,
       borderWidth: 1,
-      borderColor: colors.RequestLabelA_Sub,
+      borderColor: colors.ReleaseLabelA_Sub,
     },
     textStyles: {
-      color: colors.RequestLabelA_Sub,
+      color: colors.ReleaseLabelA_Sub,
     },
   },
-  requestB: {
+  releaseB: {
     text: '출고완료',
     boxStyles: {
-      backgroundColor: colors.RequestLabelB_Main,
+      backgroundColor: colors.ReleaseLabelB_Main,
       borderWidth: 1,
-      borderColor: colors.RequestLabelB_Sub,
+      borderColor: colors.ReleaseLabelB_Sub,
     },
     textStyles: {
-      color: colors.RequestLabelB_Sub,
+      color: colors.ReleaseLabelB_Sub,
     },
   },
-  requestC: {
+  releaseC: {
     text: '출고취소',
     boxStyles: {
-      backgroundColor: colors.RequestLabelC_Main,
+      backgroundColor: colors.ReleaseLabelC_Main,
       borderWidth: 1,
-      borderColor: colors.RequestLabelC_Sub,
+      borderColor: colors.ReleaseLabelC_Sub,
     },
     textStyles: {
-      color: colors.RequestLabelC_Sub,
+      color: colors.ReleaseLabelC_Sub,
     },
   },
   depositA: {
