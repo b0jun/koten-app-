@@ -5,17 +5,21 @@ import styles from '../styles';
 
 import colors from '~/styles/colors';
 
-const tableData = {
-  type: 'sum',
-  title: '재고현황',
-  rows: [
-    { key: 1, rowTitle: 'A창고', rowValue: 250 },
-    { key: 2, rowTitle: 'A창고', rowValue: 250 },
-    { key: 3, rowTitle: 'A창고', rowValue: 500 },
-  ],
-};
+interface IRows {
+  key: number;
+  rowTitle: string;
+  rowValue: number;
+}
+interface ITableData {
+  title: string;
+  rows: IRows[];
+}
 
-const SumTable = () => {
+interface IProps {
+  tableData: ITableData;
+}
+
+const SumTable = ({ tableData }: IProps) => {
   const sum = tableData.rows.reduce((a, b) => a + b.rowValue, 0);
   const sumRow = { key: 0, rowTitle: '합계', rowValue: sum };
   const tempRows = tableData.rows.concat(sumRow);

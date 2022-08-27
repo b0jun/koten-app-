@@ -68,6 +68,37 @@ const globalStyles = StyleSheet.create({
     marginBottom: 20,
     marginHorizontal: 16,
   },
+  head: {
+    flexDirection: 'row',
+    height: 48,
+    borderBottomColor: colors.Grey100,
+    borderBottomWidth: 1,
+    alignItems: 'center',
+    paddingHorizontal: 16,
+  },
+  headText: {
+    color: colors.Black,
+    fontFamily: 'NotoSansKR-Medium',
+    letterSpacing: -0.52,
+    fontSize: 13,
+    lineHeight: 19,
+  },
+  bodyBorder: {
+    borderBottomColor: colors.HeaderBorder,
+    borderBottomWidth: 1,
+  },
+  body: {
+    flexDirection: 'row',
+    height: 48,
+    alignItems: 'center',
+    paddingHorizontal: 16,
+  },
+  bodyText: {
+    color: colors.Black,
+    fontFamily: 'NotoSansKR-Regular',
+    fontSize: 13,
+    lineHeight: 19,
+  },
 });
 
 export default globalStyles;

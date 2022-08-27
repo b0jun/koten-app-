@@ -5,22 +5,24 @@ import styles from '../styles';
 
 import colors from '~/styles/colors';
 
-// TODO: API 값에 따라 CommonTable Props 수정
-const tableData = {
-  type: 'common',
-  title: '제품정보',
-  rows: [
-    { key: 1, rowTitle: '제품명', rowValue: '코텐 미니레이저 레벨기' },
-    { key: 2, rowTitle: '제품분류', rowValue: '코텐 미니레이저 레벨기' },
-    { key: 3, rowTitle: '브랜드', rowValue: 'Koten' },
-  ],
-};
+interface IRows {
+  rowTitle: string;
+  rowValue: string;
+}
+interface ITableData {
+  title: string;
+  rows: IRows[];
+}
 
-const CommonTable = () => {
+interface IProps {
+  tableData: ITableData;
+}
+
+const CommonTable = ({ tableData }: IProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.tableTitle}>{tableData.title}</Text>
-      {tableData.rows.map(({ key, rowTitle, rowValue }, index) => {
+      {tableData.rows.map(({ rowTitle, rowValue }, index) => {
         const rowStyles =
           tableData.rows.length - 1 === index
             ? {
@@ -30,7 +32,7 @@ const CommonTable = () => {
               }
             : { ...styles.row };
         return (
-          <View key={key} style={rowStyles}>
+          <View key={rowTitle} style={rowStyles}>
             <Text style={styles.rowTitle}>{rowTitle}</Text>
             <Text style={styles.rowValue}>{rowValue}</Text>
           </View>
