@@ -82,6 +82,7 @@ const globalStyles = StyleSheet.create({
     letterSpacing: -0.52,
     fontSize: 13,
     lineHeight: 19,
+    marginRight: 8,
   },
   bodyBorder: {
     borderBottomColor: colors.HeaderBorder,
@@ -98,6 +99,7 @@ const globalStyles = StyleSheet.create({
     fontFamily: 'NotoSansKR-Regular',
     fontSize: 13,
     lineHeight: 19,
+    marginRight: 8,
   },
 });
 

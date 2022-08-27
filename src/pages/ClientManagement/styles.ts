@@ -5,10 +5,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   second: {
-    flex: 1,
+    flex: 1.5,
   },
   third: {
-    flex: 1.8,
+    flex: 2,
   },
 });
 

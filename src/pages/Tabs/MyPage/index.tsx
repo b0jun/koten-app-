@@ -23,7 +23,7 @@ const MyPage = () => {
     },
     {
       title: '고객 관리',
-      page: '',
+      page: 'ClientManagement',
     },
     {
       title: '출고 관리',

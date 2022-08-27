@@ -15,105 +15,105 @@ import globalStyles from '~/styles/globalStyles';
 const dummyInventory = [
   {
     id: 1,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 2,
-    office: '인천 지사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 3,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 4,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 5,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 6,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 7,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 8,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 9,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 10,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 11,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 12,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 13,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 14,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 15,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 16,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
   {
     id: 17,
-    office: '인천 마지막',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
+    customer: '(주)안전제일',
+    phoneNumber: '02-424-1234',
+    address: '인천 서구 원석로 196안길',
   },
 ];
 
@@ -180,24 +180,24 @@ const CustomerManagement = () => {
         onSubmitEditing={handleSubmit(onSearch)}
       />
       <View style={globalStyles.head}>
-        <Text style={[globalStyles.headText, styles.first]}>본사/지사</Text>
-        <Text style={[globalStyles.headText, styles.second]}>제품명</Text>
-        <Text style={[globalStyles.headText, styles.third]}>총재고</Text>
+        <Text style={[globalStyles.headText, styles.first]}>거래처명</Text>
+        <Text style={[globalStyles.headText, styles.second]}>전화번호</Text>
+        <Text style={[globalStyles.headText, styles.third]}>주소</Text>
       </View>
       <ScrollView style={globalStyles.flex}>
         {isShowList &&
-          dummyInventory.map(({ id, office, product, stock }) => (
+          dummyInventory.map(({ id, customer, phoneNumber, address }) => (
             <View key={id}>
               <TouchableHighlight style={globalStyles.body} underlayColor={colors.HeaderBorder} onPress={togglePopup}>
                 <>
                   <Text style={[globalStyles.bodyText, styles.first]} numberOfLines={1}>
-                    {office}
+                    {customer}
                   </Text>
                   <Text style={[globalStyles.bodyText, styles.second]} numberOfLines={1}>
-                    {product}
+                    {phoneNumber}
                   </Text>
                   <Text style={[globalStyles.bodyText, styles.third]} numberOfLines={1}>
-                    {stock}개
+                    {address}
                   </Text>
                 </>
               </TouchableHighlight>

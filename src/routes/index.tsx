@@ -20,6 +20,7 @@ import PWResetMain from '~/pages/Auth/PWResetMain';
 import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
 import SignUpCompleted from '~/pages/Auth/SignUpCompleted';
+import ClientManagement from '~/pages/ClientManagement';
 import CustomerManagement from '~/pages/CustomerManagement';
 import ModifyUserInfo from '~/pages/ModifyUserInfo';
 import Notification from '~/pages/Notification';
@@ -132,6 +133,7 @@ const MainNavigator = () => {
       <MainStack.Screen name="RepairHistoryDetail" component={RepairHistoryDetail} />
       <MainStack.Screen name="Notification" component={Notification} />
       <MainStack.Screen name="CustomerManagement" component={CustomerManagement} />
+      <MainStack.Screen name="ClientManagement" component={ClientManagement} />
     </MainStack.Navigator>
   );
 };

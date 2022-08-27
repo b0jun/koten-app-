@@ -10,7 +10,7 @@ interface IRows {
   rowValue: string;
 }
 interface ITableData {
-  title: string;
+  title?: string;
   rows: IRows[];
 }
 

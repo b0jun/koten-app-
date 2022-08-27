@@ -30,6 +30,7 @@ export type MainNavigatorParamList = {
   RepairHistoryDetail: undefined;
   Notification: undefined;
   CustomerManagement: undefined;
+  ClientManagement: undefined;
 };
 
 export type RootStackNavigationProps<T extends keyof RootStackParamList> = NativeStackNavigationProp<
