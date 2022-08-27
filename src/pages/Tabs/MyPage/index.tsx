@@ -29,13 +29,26 @@ const MyPage = () => {
       title: '출고 관리',
       page: 'ReleaseManagement',
     },
+    // TODO: 삭제
+    {
+      title: '정산 관리',
+      page: 'AccountManagement',
+    },
+    {
+      title: '제품 출고요청',
+      page: 'ProductReleaseRequest',
+    },
+    {
+      title: '입/출고 관리',
+      page: '',
+    },
   ];
 
   const logisticsOptions = [
     ...defaultOptions,
     {
       title: '제품 출고요청',
-      page: '',
+      page: 'ProductReleaseRequest',
     },
     {
       title: '입/출고 관리',
@@ -47,7 +60,7 @@ const MyPage = () => {
     ...defaultOptions,
     {
       title: '정산 관리',
-      page: '',
+      page: 'AccountManagement',
     },
   ];
 

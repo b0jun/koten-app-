@@ -14,6 +14,7 @@ import {
   RootStackParamList,
 } from './types';
 
+import AccountManagement from '~/pages/AccountManagement ';
 import PWResetCompleted from '~/pages/Auth/PWResetCompleted';
 import PWResetEmailVerify from '~/pages/Auth/PWResetEmailVerify';
 import PWResetMain from '~/pages/Auth/PWResetMain';
@@ -24,6 +25,7 @@ import ClientManagement from '~/pages/ClientManagement';
 import CustomerManagement from '~/pages/CustomerManagement';
 import ModifyUserInfo from '~/pages/ModifyUserInfo';
 import Notification from '~/pages/Notification';
+import ProductReleaseRequest from '~/pages/ProductReleaseRequest';
 import ReleaseManagement from '~/pages/ReleaseManagement';
 import RepairHistoryDetail from '~/pages/RepairHistoryDetail';
 import Home from '~/pages/Tabs/Home';
@@ -136,6 +138,8 @@ const MainNavigator = () => {
       <MainStack.Screen name="CustomerManagement" component={CustomerManagement} />
       <MainStack.Screen name="ClientManagement" component={ClientManagement} />
       <MainStack.Screen name="ReleaseManagement" component={ReleaseManagement} />
+      <MainStack.Screen name="AccountManagement" component={AccountManagement} />
+      <MainStack.Screen name="ProductReleaseRequest" component={ProductReleaseRequest} />
     </MainStack.Navigator>
   );
 };
