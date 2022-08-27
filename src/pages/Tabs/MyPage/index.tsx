@@ -19,7 +19,7 @@ const MyPage = () => {
   const defaultOptions = [
     {
       title: '거래처 관리',
-      page: '',
+      page: 'CustomerManagement',
     },
     {
       title: '고객 관리',
