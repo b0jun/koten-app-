@@ -167,7 +167,7 @@ const ClientManagement = () => {
       <SearchInput
         control={control}
         name="search"
-        placeholder="고객명을 입력해주세요."
+        placeholder="이름을 입력해주세요."
         onSubmitEditing={handleSubmit(onSearch)}
       />
       <View style={globalStyles.head}>
