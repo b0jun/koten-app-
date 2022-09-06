@@ -7,26 +7,16 @@ import styles from './styles';
 interface IProps {
   isBack?: boolean;
   title: string;
-  type?: 'common' | 'search' | 'close';
+  type?: 'common' | 'close';
   isBorder?: boolean;
   onPressIcon?: () => void;
 }
-
-interface IButtons {
-  search: React.ReactElement;
-  close: React.ReactElement;
-}
-
-const buttonType: IButtons = {
-  search: <Image source={require('~/assets/icons/ic_search.png')} style={styles.icon} />,
-  close: <Image source={require('~/assets/icons/ic_close.png')} style={styles.icon} />,
-};
 
 const Header = ({ isBack, title, type = 'common', isBorder, onPressIcon }: IProps) => {
   const navigation = useNavigation();
   const headerWrapperStyles = {
     ...styles.wrapper,
-    borderBottomWidth: isBorder ? (type === 'search' ? 8 : 1) : 0,
+    borderBottomWidth: isBorder ? 1 : 0,
   };
   return (
     <View style={headerWrapperStyles}>
@@ -39,9 +29,9 @@ const Header = ({ isBack, title, type = 'common', isBorder, onPressIcon }: IProp
       </View>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.iconWrapper}>
-        {type !== 'common' && (
+        {type === 'close' && (
           <TouchableOpacity onPress={onPressIcon} activeOpacity={0.7}>
-            {buttonType[type]}
+            <Image source={require('~/assets/icons/ic_close.png')} style={styles.icon} />
           </TouchableOpacity>
         )}
       </View>

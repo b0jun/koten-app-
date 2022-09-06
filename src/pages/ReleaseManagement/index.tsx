@@ -8,6 +8,7 @@ import styles from './styles';
 import Header from '~/components/Header';
 import Label, { ReleaseType } from '~/components/Label';
 import SearchInput from '~/components/SearchInput';
+import { MainStackNavigationProps } from '~/routes/types';
 import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
@@ -123,7 +124,11 @@ const dummyInventory: IInventory[] = [
   },
 ];
 
-const ReleaseManagement = () => {
+interface IProps {
+  navigation?: MainStackNavigationProps<'ReleaseDetail'>;
+}
+
+const ReleaseManagement = ({ navigation }: IProps) => {
   const { control, watch, handleSubmit } = useForm({
     mode: 'onSubmit',
     defaultValues: {
@@ -154,7 +159,7 @@ const ReleaseManagement = () => {
 
   return (
     <SafeAreaView edges={['top']} style={globalStyles.flexWithBG}>
-      <Header isBack title="출고 관리" isBorder onPressIcon={() => console.log('TEMP')} />
+      <Header isBack title="출고 관리" isBorder />
       <SearchInput
         control={control}
         name="search"
@@ -173,7 +178,7 @@ const ReleaseManagement = () => {
               <TouchableHighlight
                 style={globalStyles.body}
                 underlayColor={colors.HeaderBorder}
-                onPress={() => console.log('TEMP')}
+                onPress={() => navigation?.navigate('ReleaseDetail')}
               >
                 <>
                   <Text style={[globalStyles.bodyText, styles.first]} numberOfLines={1}>

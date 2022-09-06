@@ -157,7 +157,7 @@ const RepairHistory = ({ navigation }: IProps) => {
 
   return (
     <SafeAreaView edges={['top']} style={globalStyles.flexWithBG}>
-      <Header isBack title="수리내역" isBorder onPressIcon={() => console.log('TEMP')} />
+      <Header isBack title="수리내역" isBorder />
       <SearchInput
         control={control}
         name="search"
