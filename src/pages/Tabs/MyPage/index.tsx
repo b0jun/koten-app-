@@ -95,7 +95,6 @@ const MyPage = () => {
       <SafeAreaView style={styles.topSafeArea}>
         <View style={styles.topWrapper}>
           <View style={globalStyles.row}>
-            <Image source={require('~/assets/images/img_profile.png')} style={styles.profileImage} />
             <View>
               <View style={styles.topItemWrapper}>
                 <Text style={styles.name}>홍길동님</Text>
