@@ -26,6 +26,7 @@ import CustomerManagement from '~/pages/CustomerManagement';
 import ModifyUserInfo from '~/pages/ModifyUserInfo';
 import Notification from '~/pages/Notification';
 import ProductReleaseRequest from '~/pages/ProductReleaseRequest';
+import ReleaseDetail from '~/pages/ReleaseDetail';
 import ReleaseManagement from '~/pages/ReleaseManagement';
 import RepairHistoryDetail from '~/pages/RepairHistoryDetail';
 import Home from '~/pages/Tabs/Home';
@@ -140,6 +141,7 @@ const MainNavigator = () => {
       <MainStack.Screen name="ReleaseManagement" component={ReleaseManagement} />
       <MainStack.Screen name="AccountManagement" component={AccountManagement} />
       <MainStack.Screen name="ProductReleaseRequest" component={ProductReleaseRequest} />
+      <MainStack.Screen name="ReleaseDetail" component={ReleaseDetail} />
     </MainStack.Navigator>
   );
 };

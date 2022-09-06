@@ -9,6 +9,8 @@ export default {
   HomeHeaderBorder: '#00000014',
   Disabled: '#F5F5F5',
   DashboardSub: '#ffffff66',
+  DeliveryActiveBG: '#FFF8E3',
+  DeliveryInactiveBG: '#F9F9F9',
 
   White200: '#FFFFFF33', // 20%,
   White800: '#FFFFFFCC',

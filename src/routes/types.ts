@@ -34,6 +34,7 @@ export type MainNavigatorParamList = {
   ReleaseManagement: undefined;
   AccountManagement: undefined;
   ProductReleaseRequest: undefined;
+  ReleaseDetail: undefined;
 };
 
 export type RootStackNavigationProps<T extends keyof RootStackParamList> = NativeStackNavigationProp<
