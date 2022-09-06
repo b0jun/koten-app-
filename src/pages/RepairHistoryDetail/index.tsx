@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 
 import Header from '~/components/Header';
-import ProductInfo from '~/components/ProductInfo';
 import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
@@ -21,7 +20,9 @@ const RepairHistoryDetail = () => {
     ...styles.section,
     borderBottomColor: colors.HeaderBorder,
     borderBottomWidth: 8,
+    marginTop: 20,
     marginBottom: 20,
+    paddingBottom: 24,
   };
 
   const dummyRepairList = [
@@ -52,7 +53,19 @@ const RepairHistoryDetail = () => {
       <Header title="수리 상세내역" isBorder type="close" onPressIcon={goBack} />
       <ScrollView style={globalStyles.flex} contentContainerStyle={styles.scrollViewInner}>
         <View style={sectionWithDividerStyles}>
-          <ProductInfo customer="대한측기 (인천점)" serialNumber="MINI3D757632" product="코텐 미니레이저 레벨기" />
+          <Text style={globalStyles.detailLabel}>제품정보</Text>
+          <View style={globalStyles.rowWrapper}>
+            <Text style={globalStyles.rowTitle}>거래처명</Text>
+            <Text style={globalStyles.rowValue}>대한측기 (인천점)</Text>
+          </View>
+          <View style={globalStyles.rowWrapper}>
+            <Text style={globalStyles.rowTitle}>일련번호</Text>
+            <Text style={globalStyles.rowValue}>MINI3D757632</Text>
+          </View>
+          <View style={globalStyles.rowWrapper}>
+            <Text style={globalStyles.rowTitle}>제품명</Text>
+            <Text style={globalStyles.rowValue}>코텐 미니레이저 레벨기</Text>
+          </View>
         </View>
         <View style={styles.labelWrapper}>
           <Text style={globalStyles.detailLabel}>수리내역</Text>
