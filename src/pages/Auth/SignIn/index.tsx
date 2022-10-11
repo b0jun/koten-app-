@@ -1,13 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { Controller, get, useForm } from 'react-hook-form';
+import { Controller, get, SubmitHandler, useForm } from 'react-hook-form';
 import { Image, TouchableOpacity, Text, TextInput, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as yup from 'yup';
 
 import styles from './styles';
 
+import useGetUserInfo from '~/hooks/api/useGetUserInfo';
+import useLogin from '~/hooks/api/useLogin';
 import { AuthStackNavigationProps } from '~/routes/types';
 import colors from '~/styles/colors';
 
@@ -52,8 +54,12 @@ const SignIn = ({ navigation }: IProps) => {
     resetField(type);
   };
 
-  // TODO: 추후 타입 지정
-  const onSubmit = (data) => console.log(data);
+  const { mutate: login, isSuccess } = useLogin();
+  useGetUserInfo(isSuccess);
+
+  const onSubmit: SubmitHandler<IFormData> = (data) => {
+    login(data);
+  };
 
   const [focusInput, setFocusInput] = useState({
     email: false,
