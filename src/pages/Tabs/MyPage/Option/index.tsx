@@ -8,7 +8,7 @@ import colors from '~/styles/colors';
 
 interface IList {
   title: string;
-  page: string;
+  page?: string;
   onPress?: () => void;
 }
 
@@ -30,13 +30,17 @@ const Option = ({ optionTitle, list, isLast }: IProps) => {
       <View style={styles.optionTitleBorder}>
         <Text style={styles.optionTitle}>{optionTitle}</Text>
       </View>
-      {list.map(({ title, page }) => (
+      {list.map(({ title, page, onPress }) => (
         <TouchableHighlight
           underlayColor={colors.Grey50}
           key={title}
           style={styles.optionItemButton}
           onPress={() => {
-            navigation.navigate(page);
+            if (page) {
+              navigation.navigate(page);
+              return;
+            }
+            onPress && onPress();
           }}
         >
           <Text style={styles.optionItem}>{title}</Text>

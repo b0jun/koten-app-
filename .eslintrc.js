@@ -17,6 +17,7 @@ module.exports = {
         'global-require': 0,
         'no-console': 0,
         'no-explicit-any': 0,
+        'no-param-reassign': 'off',
         'import/extensions': 0,
         'react/react-in-jsx-scope': 0,
         'react/require-default-props': 0,

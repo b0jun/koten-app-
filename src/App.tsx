@@ -1,14 +1,15 @@
-import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux';
 
 import AppRouter from './routes';
+import { store } from './store/configureStore';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: {
-      retry: false,
-    },
+    queries: { retry: false },
+    mutations: { retry: false },
   },
 });
 
@@ -20,11 +21,13 @@ if (__DEV__) {
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <AppRouter />
-      </SafeAreaProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>
+          <AppRouter />
+        </SafeAreaProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 };
 

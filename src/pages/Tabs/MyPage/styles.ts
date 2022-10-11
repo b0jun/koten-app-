@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     height: 24,
   },
   scrollView: {
-    paddingTop: 40,
+    paddingVertical: 40,
   },
 });
 

@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import styles from './styles';
 import {
@@ -14,6 +15,9 @@ import {
   RootStackParamList,
 } from './types';
 
+import type { RootState } from '~/store/configureStore';
+
+import useGetUserInfo from '~/hooks/api/useGetUserInfo';
 import AccountManagement from '~/pages/AccountManagement ';
 import PWResetCompleted from '~/pages/Auth/PWResetCompleted';
 import PWResetEmailVerify from '~/pages/Auth/PWResetEmailVerify';
@@ -145,12 +149,19 @@ const MainNavigator = () => {
     </MainStack.Navigator>
   );
 };
+
 const AppRouter = () => {
+  useGetUserInfo();
+  const userInfo = useSelector((state: RootState) => state.user.userInfo);
+
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <RootStack.Screen name="AuthNavigator" component={AuthNavigator} /> */}
-        <RootStack.Screen name="MainNavigator" component={MainNavigator} />
+        {userInfo ? (
+          <RootStack.Screen name="MainNavigator" component={MainNavigator} />
+        ) : (
+          <RootStack.Screen name="AuthNavigator" component={AuthNavigator} />
+        )}
       </RootStack.Navigator>
     </NavigationContainer>
   );

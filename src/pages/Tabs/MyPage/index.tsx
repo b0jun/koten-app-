@@ -6,6 +6,7 @@ import { ScrollView, Text, View, SafeAreaView, Image, StatusBar, TouchableOpacit
 import Option from './Option';
 import styles from './styles';
 
+import useLogout from '~/hooks/api/useLogout';
 import { MainNavigatorParamList } from '~/routes/types';
 import globalStyles from '~/styles/globalStyles';
 
@@ -15,6 +16,8 @@ const MyPage = () => {
   const goToPage = () => {
     navigation.navigate('Notification');
   };
+
+  const { mutate: logout } = useLogout();
 
   const defaultOptions = [
     {
@@ -86,7 +89,9 @@ const MyPage = () => {
     },
     {
       title: '로그아웃',
-      page: '',
+      onPress: () => {
+        logout();
+      },
     },
   ];
   return (
@@ -111,7 +116,7 @@ const MyPage = () => {
         </View>
       </SafeAreaView>
       <SafeAreaView style={styles.bottomSafeArea}>
-        <ScrollView keyboardShouldPersistTaps="handled" style={styles.scrollView}>
+        <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.scrollView}>
           <Option optionTitle="나의업무" list={defaultOptions} />
           <Option optionTitle="앱정보" list={appInfoOptions} />
           <Option optionTitle="My" list={myOptions} />
