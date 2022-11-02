@@ -7,18 +7,16 @@ import * as yup from 'yup';
 
 import styles from './styles';
 
+import type { SubmitHandler } from 'react-hook-form';
+import type { ISignUpData } from '~/types/formData';
+
 import Button from '~/components/Button';
 import Dropdown from '~/components/Dropdown';
 import FormInput from '~/components/FormInput';
 import Header from '~/components/Header';
-import { AuthStackNavigationProps } from '~/routes/types';
+import useGetOfficeList from '~/hooks/api/useGetOfficeList';
+import useSignUp from '~/hooks/api/useSignUp';
 import globalStyles from '~/styles/globalStyles';
-import { IDepartment } from '~/types/dropdown';
-import { ISignUpData } from '~/types/formData';
-
-interface IProps {
-  navigation: AuthStackNavigationProps<'SignIn'>;
-}
 
 const schema = yup.object({
   name: yup.string().max(50).required('이름을 입력해주세요.'),
@@ -37,14 +35,9 @@ const schema = yup.object({
     .required('비밀번호를 입력해주세요.'),
 });
 
-const dropdownData: IDepartment[] = [
-  { label: '물류', value: '물류' },
-  { label: '회계', value: '회계' },
-];
-
-const SignUp = ({ navigation }: IProps) => {
+const SignUp = () => {
   const [isScrollTop, setIsScrollTop] = useState(true);
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selectedOffice, setSelectedOffice] = useState<number | null>(null);
 
   const {
     control,
@@ -61,15 +54,27 @@ const SignUp = ({ navigation }: IProps) => {
       passwordConfirm: '',
     },
   });
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(selected);
 
-    reset();
-    navigation.navigate('SignUpCompleted');
+  const officeList = useGetOfficeList();
+  const onChangeDropdownValue = (value: number) => {
+    setSelectedOffice(value);
   };
 
-  const isValidSignUp = isValid && selected;
+  const { mutate: signUp } = useSignUp();
+
+  const onSubmit: SubmitHandler<ISignUpData> = (data) => {
+    const { email, name, password } = data;
+    const signUpFormData = {
+      office: selectedOffice as number,
+      email,
+      name,
+      password,
+    };
+    reset();
+    signUp(signUpFormData);
+  };
+
+  const isValidSignUp = isValid && selectedOffice;
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={globalStyles.flexGrowWithBG}>
@@ -88,7 +93,15 @@ const SignUp = ({ navigation }: IProps) => {
           }}
         >
           <View style={styles.inner}>
-            <Dropdown label="소속" marginBottom={20} setSelected={setSelected} data={dropdownData} />
+            {officeList && (
+              <Dropdown
+                label="소속"
+                marginBottom={20}
+                onChangeDropdownValue={onChangeDropdownValue}
+                selected={selectedOffice}
+                data={officeList}
+              />
+            )}
             <FormInput
               control={control}
               error={errors.name?.message}

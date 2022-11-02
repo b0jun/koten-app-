@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Image, Text, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -11,11 +11,12 @@ interface IProps {
   label: string;
   marginBottom: number;
   size?: 'normal' | 'small';
-  setSelected: Dispatch<SetStateAction<string | null>>;
+  onChangeDropdownValue: (value: number) => void;
   data: IDepartment[];
+  selected: number | null;
 }
 
-const Dropdown = ({ label, marginBottom = 0, size = 'normal', setSelected, data }: IProps) => {
+const Dropdown = ({ label, marginBottom = 0, size = 'normal', onChangeDropdownValue, data, selected }: IProps) => {
   const dropdownWrapperStyles = {
     marginBottom,
   };
@@ -47,6 +48,7 @@ const Dropdown = ({ label, marginBottom = 0, size = 'normal', setSelected, data 
       {label && <Text style={globalStyles.label}>{label}</Text>}
       <View style={styles.inputWrapper}>
         <RNPickerSelect
+          value={selected}
           doneText="적용"
           textInputProps={{ underlineColorAndroid: 'transparent' }}
           useNativeAndroidPickerStyle={false}
@@ -55,7 +57,7 @@ const Dropdown = ({ label, marginBottom = 0, size = 'normal', setSelected, data 
             label: '소속을 선택해주세요',
             value: null,
           }}
-          onValueChange={(value) => setSelected(value)}
+          onValueChange={(value) => onChangeDropdownValue(value)}
           items={data}
           style={dropdownStyles}
         />

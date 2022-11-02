@@ -1,6 +1,6 @@
 interface IDepartment {
   label: string;
-  value: string;
+  value: number;
 }
 
 // eslint-disable-next-line import/prefer-default-export
