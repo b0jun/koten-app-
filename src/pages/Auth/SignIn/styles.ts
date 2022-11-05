@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: -0.8,
     lineHeight: 23,
+    color: colors.Label,
   },
   inputText: {
     width: '100%',
