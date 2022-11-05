@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as yup from 'yup';
@@ -10,6 +10,8 @@ import styles from './styles';
 import Button from '~/components/Button';
 import FormInput from '~/components/FormInput';
 import Header from '~/components/Header';
+import useSendEmail from '~/hooks/api/useSendEmail';
+import useVerifyEmail from '~/hooks/api/useVerifyEmail';
 import useBackgroundInterval from '~/hooks/common/useBackgroundInterval';
 import { AuthStackNavigationProps } from '~/routes/types';
 import globalStyles from '~/styles/globalStyles';
@@ -28,7 +30,7 @@ const codeSchema = yup.object({
   code: yup.string().length(6, '').required('인증번호를 입력해주세요.'),
 });
 
-const VERIFY_TIME = 10;
+const VERIFY_TIME = 30;
 
 interface IProps {
   navigation: AuthStackNavigationProps<'PWResetEmailVerify'>;
@@ -49,6 +51,7 @@ const PWResetEmailVerify = ({ navigation }: IProps) => {
       }
       setIsCount(false);
       setCount(VERIFY_TIME);
+      codeReset();
     }
   }, 1000);
 
@@ -57,6 +60,7 @@ const PWResetEmailVerify = ({ navigation }: IProps) => {
     control: emailControl,
     handleSubmit: emailHandleSubmit,
     reset: emailReset,
+    getValues: emailGetValues,
     formState: { errors: emailErrors, isValid: emailIsValid },
   } = useForm<IEmail>({
     resolver: yupResolver(emailSchema),
@@ -82,22 +86,31 @@ const PWResetEmailVerify = ({ navigation }: IProps) => {
   const isDisabledEmailButton = isCount || !emailIsValid;
   const isDisabledCodeButton = !isCount || !codeIsValid;
   // const isVerifyCompleted = emailIsValid && codeIsValid && isVerify;
-
-  const onEmailSubmit = (data) => {
-    console.log('Email Submit', data);
+  const startTimer = () => {
     setIsCount(true);
     setTimeout(() => codeRef.current?.focus(), 100);
   };
-
-  const onCodeSubmit = (data) => {
-    console.log('Code Submit', data);
-    // TODO: API 응답 분기 처리
-    // [ERROR] 인증번호가 다릅니다.
+  const successVerify = () => {
     setIsCount(false);
     setCount(VERIFY_TIME);
     navigation.navigate('PWResetMain');
     emailReset();
     codeReset();
+  };
+  const { mutate: sendEmail } = useSendEmail(startTimer);
+  const { mutate: verifyEmail } = useVerifyEmail(successVerify);
+
+  const onEmailSubmit: SubmitHandler<IEmail> = (data) => {
+    console.log('Email Submit', data);
+    sendEmail(data);
+  };
+
+  const onCodeSubmit: SubmitHandler<ICode> = (data) => {
+    const authCode = Number(data.code);
+    verifyEmail({
+      authCode,
+      email: emailGetValues().email,
+    });
   };
 
   const labelStyles = {
