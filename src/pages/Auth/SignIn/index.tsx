@@ -8,6 +8,7 @@ import * as yup from 'yup';
 
 import styles from './styles';
 
+import Loading from '~/components/Loading';
 import useGetUserInfo from '~/hooks/api/useGetUserInfo';
 import useLogin from '~/hooks/api/useLogin';
 import { AuthStackNavigationProps } from '~/routes/types';
@@ -54,7 +55,7 @@ const SignIn = ({ navigation }: IProps) => {
     resetField(type);
   };
 
-  const { mutate: login, isSuccess } = useLogin();
+  const { mutate: login, isSuccess, isLoading } = useLogin();
   useGetUserInfo(isSuccess);
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
@@ -174,6 +175,7 @@ const SignIn = ({ navigation }: IProps) => {
           <Text style={styles.footerText}>회원가입</Text>
         </TouchableOpacity>
       </View>
+      {isLoading && <Loading />}
     </SafeAreaView>
   );
 };
