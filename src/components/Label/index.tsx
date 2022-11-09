@@ -30,7 +30,7 @@ export type DepositType = 'depositA' | 'depositB' | 'depositC';
 export type ReleaseType = 'releaseA' | 'releaseB' | 'releaseC';
 
 interface IProps {
-  type: DeliveryType | RepairType | DepositType | ReleaseType;
+  type: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

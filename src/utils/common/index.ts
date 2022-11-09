@@ -11,4 +11,8 @@ const convertStoM = (time: number) => {
   return `${minutes}:${seconds}`;
 };
 
-export { convertStoM };
+const insertComma = (price: string) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+export { convertStoM, insertComma };

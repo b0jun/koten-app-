@@ -3,91 +3,54 @@ import { Image, Text, View } from 'react-native';
 
 import styles from './styles';
 
+import { ILogisticsSection } from '~/api/home/getHomeInfoList';
 import Dashboard from '~/components/Dashboard';
-import Label from '~/components/Label';
-import globalStyles from '~/styles/globalStyles';
 import IDashboardList from '~/types/dashboard';
 
-const LogisticsSection = () => {
+interface IProps {
+  data: ILogisticsSection;
+}
+
+const LogisticsSection = ({ data }: IProps) => {
+  const { inItem, moveItem, outItem, releaseRequest, waitRelease, stockList } = data;
   const dashboardListA: IDashboardList[] = [
     {
-      title: '신규접수',
-      value: 10,
+      title: '출고대기',
+      value: waitRelease,
     },
     {
-      title: '출고대기',
-      value: 10,
+      title: '제품 출고 요청',
+      value: releaseRequest,
     },
   ];
 
   const dashboardListB: IDashboardList[] = [
     {
-      title: '발송준비',
-      value: 10,
+      title: '입고',
+      value: inItem,
     },
     {
-      title: '배송중',
-      value: 10,
+      title: '출고',
+      value: outItem,
     },
     {
-      title: '배송완료',
-      value: 10,
+      title: '재고 변동',
+      value: moveItem,
     },
   ];
   return (
     <View style={styles.wrapper}>
       <Dashboard isGap list={dashboardListA} />
       <Dashboard list={dashboardListB} />
-      <Text style={styles.title}>재고 리스트</Text>
-      <View style={styles.list}>
-        <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-        <View style={styles.listItemWrapper}>
-          <Image source={require('~/assets/icons/ic_down.png')} style={styles.listItemIcon} />
-          <Text style={styles.listItemSubText}>{10}개</Text>
+      <Text style={styles.title}>입/출고 리스트</Text>
+      {stockList.map(({ office, officeIndex, product, productIndex, quantity }) => (
+        <View key={`${officeIndex}_${productIndex}`} style={styles.list}>
+          <Text style={styles.listItemText}>{office}</Text>
+          <View style={styles.listItemWrapper}>
+            <Text style={styles.listItemSubText}>{10}개</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.list}>
-        <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-        <View style={styles.listItemWrapper}>
-          <Image source={require('~/assets/icons/ic_up.png')} style={styles.listItemIcon} />
-          <Text style={styles.listItemSubText}>{10}개</Text>
-        </View>
-      </View>
-      <View style={styles.list}>
-        <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-        <View style={styles.listItemWrapper}>
-          <Image source={require('~/assets/icons/ic_up.png')} style={styles.listItemIcon} />
-          <Text style={styles.listItemSubText}>{10}개</Text>
-        </View>
-      </View>
-      <View style={styles.list}>
-        <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-        <View style={styles.listItemWrapper}>
-          <Image source={require('~/assets/icons/ic_up.png')} style={styles.listItemIcon} />
-          <Text style={styles.listItemSubText}>{10}개</Text>
-        </View>
-      </View>
-      <View style={styles.list}>
-        <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-        <View style={styles.listItemWrapper}>
-          <Image source={require('~/assets/icons/ic_up.png')} style={styles.listItemIcon} />
-          <Text style={styles.listItemSubText}>{10}개</Text>
-        </View>
-      </View>
-      <View style={styles.list}>
-        <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-        <View style={styles.listItemWrapper}>
-          <Image source={require('~/assets/icons/ic_up.png')} style={styles.listItemIcon} />
-          <Text style={styles.listItemSubText}>{10}개</Text>
-        </View>
-      </View>
-      <View style={styles.list}>
-        <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-        <View style={styles.listItemWrapper}>
-          <Image source={require('~/assets/icons/ic_up.png')} style={styles.listItemIcon} />
-          <Text style={styles.listItemSubText}>{10}개</Text>
-        </View>
-      </View>
+      ))}
     </View>
   );
 };

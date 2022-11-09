@@ -3,101 +3,68 @@ import { Text, View } from 'react-native';
 
 import styles from './styles';
 
+import { IDefaultSection, IRepairList } from '~/api/home/getHomeInfoList';
 import Dashboard from '~/components/Dashboard';
 import Label from '~/components/Label';
 import globalStyles from '~/styles/globalStyles';
 import IDashboardList from '~/types/dashboard';
 
-const DefaultSection = () => {
+interface IProps {
+  data: IDefaultSection;
+}
+
+const DefaultSection = ({ data }: IProps) => {
+  console.log('DefaultSection:', data);
+
   const dashboardListA: IDashboardList[] = [
     {
       title: '신규접수',
-      value: 10,
+      value: data.newReception,
     },
     {
       title: '수리대기',
-      value: 10,
+      value: data.waitRepair,
     },
     {
       title: '출고대기',
-      value: 10,
+      value: data.waitRelease,
     },
   ];
 
   const dashboardListB: IDashboardList[] = [
     {
       title: '발송준비',
-      value: 10,
+      value: data.waitDelivery,
     },
     {
       title: '배송중',
-      value: 10,
+      value: data.onDelivery,
     },
     {
       title: '배송완료',
-      value: 10,
+      value: data.completeDelivery,
     },
   ];
+
   return (
     <View style={styles.wrapper}>
       <Dashboard isGap list={dashboardListA} />
       <Dashboard list={dashboardListB} />
       <Text style={styles.title}>수리 리스트</Text>
-      <View style={styles.list}>
-        <View>
-          <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-          <View style={globalStyles.row}>
-            <Text style={styles.listItemSubText}>112111010001</Text>
-            <View style={styles.listItemDivider} />
-            <Text style={styles.listItemSubText}>스마트 스토어</Text>
+      {data.repairList.map(({ client, orderIndex, product, serialNumber }: IRepairList) => (
+        <View style={styles.list} key={orderIndex}>
+          <View>
+            <Text style={styles.listItemText}>{product}</Text>
+            <View style={globalStyles.row}>
+              <Text style={styles.listItemSubText}>{serialNumber}</Text>
+              <View style={styles.listItemDivider} />
+              <Text style={styles.listItemSubText}>{client}</Text>
+            </View>
           </View>
+          {/* TODO: Repair Type 추가 */}
+          {/* <Label type="repairA" /> */}
         </View>
-        <Label type="repairA" />
-      </View>
-      <View style={styles.list}>
-        <View>
-          <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-          <View style={globalStyles.row}>
-            <Text style={styles.listItemSubText}>112111010001</Text>
-            <View style={styles.listItemDivider} />
-            <Text style={styles.listItemSubText}>스마트 스토어</Text>
-          </View>
-        </View>
-        <Label type="repairB" />
-      </View>
-      <View style={styles.list}>
-        <View>
-          <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-          <View style={globalStyles.row}>
-            <Text style={styles.listItemSubText}>112111010001</Text>
-            <View style={styles.listItemDivider} />
-            <Text style={styles.listItemSubText}>스마트 스토어</Text>
-          </View>
-        </View>
-        <Label type="repairB" />
-      </View>
-      <View style={styles.list}>
-        <View>
-          <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-          <View style={globalStyles.row}>
-            <Text style={styles.listItemSubText}>112111010001</Text>
-            <View style={styles.listItemDivider} />
-            <Text style={styles.listItemSubText}>스마트 스토어</Text>
-          </View>
-        </View>
-        <Label type="repairB" />
-      </View>
-      <View style={styles.list}>
-        <View>
-          <Text style={styles.listItemText}>코텐 미니레이저 레벨기</Text>
-          <View style={globalStyles.row}>
-            <Text style={styles.listItemSubText}>112111010001</Text>
-            <View style={styles.listItemDivider} />
-            <Text style={styles.listItemSubText}>스마트 스토어</Text>
-          </View>
-        </View>
-        <Label type="repairB" />
-      </View>
+      ))}
     </View>
   );
 };

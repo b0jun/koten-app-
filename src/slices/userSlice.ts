@@ -1,7 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface IUserObject {
+  index: number;
+  officeIndex: number;
+  officeName: string;
+  password: string; // TODO 지워야함
+  type: 'M' | 'A' | 'B' | 'C' | 'D' | 'E';
+  department: string;
+  name: string;
+  email: string;
+  phone: string;
+}
 export interface IUserState {
-  userInfo: string | null;
+  userInfo: IUserObject | null;
 }
 
 const initialState: IUserState = {
