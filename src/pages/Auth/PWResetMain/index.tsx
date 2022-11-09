@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as yup from 'yup';
@@ -10,7 +10,7 @@ import styles from './styles';
 import Button from '~/components/Button';
 import FormInput from '~/components/FormInput';
 import Header from '~/components/Header';
-import { AuthStackNavigationProps } from '~/routes/types';
+import useResetPassword from '~/hooks/api/useResetPassword';
 import globalStyles from '~/styles/globalStyles';
 import { IPassword } from '~/types/formData';
 
@@ -25,11 +25,8 @@ const schema = yup.object({
     .required('비밀번호를 입력해주세요.'),
 });
 
-interface IProps {
-  navigation: AuthStackNavigationProps<'PWResetMain'>;
-}
-
-const PWResetMain = ({ navigation }: IProps) => {
+// TODO: route Type 적용
+const PWResetMain = ({ route }: any) => {
   const {
     control,
     handleSubmit,
@@ -42,9 +39,10 @@ const PWResetMain = ({ navigation }: IProps) => {
       passwordConfirm: '',
     },
   });
+  const { mutate } = useResetPassword();
 
-  const onSubmit = (data) => {
-    navigation.navigate('PWResetCompleted');
+  const onSubmit: SubmitHandler<IPassword> = (data) => {
+    mutate({ email: route.params.email, password: data.password });
   };
 
   return (

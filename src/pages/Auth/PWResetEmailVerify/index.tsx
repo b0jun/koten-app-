@@ -13,7 +13,6 @@ import Header from '~/components/Header';
 import useSendEmail from '~/hooks/api/useSendEmail';
 import useVerifyEmail from '~/hooks/api/useVerifyEmail';
 import useBackgroundInterval from '~/hooks/common/useBackgroundInterval';
-import { AuthStackNavigationProps } from '~/routes/types';
 import globalStyles from '~/styles/globalStyles';
 import { IEmail, ICode } from '~/types/formData';
 import { convertStoM } from '~/utils/common';
@@ -33,7 +32,8 @@ const codeSchema = yup.object({
 const VERIFY_TIME = 30;
 
 interface IProps {
-  navigation: AuthStackNavigationProps<'PWResetEmailVerify'>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  navigation: any;
 }
 
 const PWResetEmailVerify = ({ navigation }: IProps) => {
@@ -93,7 +93,7 @@ const PWResetEmailVerify = ({ navigation }: IProps) => {
   const successVerify = () => {
     setIsCount(false);
     setCount(VERIFY_TIME);
-    navigation.navigate('PWResetMain');
+    navigation.navigate('PWResetMain', { email: emailGetValues().email });
     emailReset();
     codeReset();
   };
