@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { ScrollView, View, Text, TouchableHighlight } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
 import styles from './styles';
 
@@ -9,138 +10,55 @@ import Header from '~/components/Header';
 import ModalWrapper from '~/components/ModalWrapper';
 import SearchInput from '~/components/SearchInput';
 import { CommonTable, SumTable } from '~/components/Table';
+import useGetStockDetail from '~/hooks/api/useGetStockDetail';
+import useGetStockList from '~/hooks/api/useGetStockList';
+import { RootState } from '~/store/configureStore';
 import colors from '~/styles/colors';
 import globalStyles from '~/styles/globalStyles';
 
-const dummyInventory = [
-  {
-    id: 1,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 2,
-    office: '인천 지사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 3,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 4,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 5,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 6,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 7,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 8,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 9,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 10,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 11,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 12,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 13,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 14,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 15,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 16,
-    office: '인천 본사',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-  {
-    id: 17,
-    office: '인천 마지막',
-    product: '코텐 미니레이저 레벨기',
-    stock: 1000,
-  },
-];
+interface IFormData {
+  search: string;
+}
 
-const dummyTableDataA = {
-  title: '제품정보',
-  rows: [
-    { rowTitle: '제품명', rowValue: '코텐 미니레이저 레벨기' },
-    { rowTitle: '제품분류', rowValue: '코텐 미니레이저 레벨기' },
-    { rowTitle: '브랜드', rowValue: 'Koten' },
-  ],
-};
-
-const dummyTableDataB = {
-  title: '재고현황',
-  rows: [
-    { key: 1, rowTitle: 'A창고', rowValue: 250 },
-    { key: 2, rowTitle: 'A창고', rowValue: 250 },
-    { key: 3, rowTitle: 'A창고', rowValue: 500 },
-  ],
-};
 const InventoryStatus = () => {
+  const userInfo = useSelector((state: RootState) => state.user.userInfo);
+  const { data: stockList } = useGetStockList(userInfo?.officeIndex as number);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const togglePopup = () => {
-    setIsOpenModal((prev) => !prev);
+  const [productIdx, setProductIdx] = useState<number | null>(null);
+
+  const openPopup = (index: number) => {
+    setProductIdx(index);
+    setIsOpenModal(true);
+  };
+  const closePopup = () => {
+    setProductIdx(null);
+    setIsOpenModal(false);
+  };
+  const { data: stockDetail } = useGetStockDetail({
+    officeIndex: userInfo?.officeIndex as number,
+    productIndex: productIdx,
+  });
+
+  const stockDetailList = stockDetail?.list.map((list, index) => ({
+    key: `key_${userInfo?.officeIndex}_${productIdx}_${index}`,
+    rowTitle: list.location,
+    rowValue: list.quantity,
+  }));
+
+  const tableDataA = {
+    title: '제품정보',
+    rows: [
+      { rowTitle: '제품명', rowValue: stockDetail?.product },
+      { rowTitle: '본사/지사', rowValue: stockDetail?.office },
+    ],
   };
 
-  const { control, watch, handleSubmit } = useForm({
+  const tableDataB = {
+    title: '재고현황',
+    rows: stockDetailList || [],
+  };
+
+  const { control, watch, handleSubmit } = useForm<IFormData>({
     mode: 'onSubmit',
     defaultValues: {
       search: '',
@@ -163,7 +81,7 @@ const InventoryStatus = () => {
     }
   }, [isTyping, isSubmit]);
 
-  const onSearch = (data: any) => {
+  const onSearch: SubmitHandler<IFormData> = (data) => {
     console.log(data);
     setIsSubmit(true);
   };
@@ -184,9 +102,15 @@ const InventoryStatus = () => {
       </View>
       <ScrollView style={globalStyles.flex}>
         {isShowList &&
-          dummyInventory.map(({ id, office, product, stock }) => (
-            <View key={id}>
-              <TouchableHighlight style={globalStyles.body} underlayColor={colors.HeaderBorder} onPress={togglePopup}>
+          stockList?.map(({ officeIndex, office, product, productIndex, quantity }) => (
+            <View key={`${officeIndex}_${productIndex}`}>
+              <TouchableHighlight
+                style={globalStyles.body}
+                underlayColor={colors.HeaderBorder}
+                onPress={() => {
+                  openPopup(productIndex as number);
+                }}
+              >
                 <>
                   <Text style={[globalStyles.bodyText, styles.first]} numberOfLines={1}>
                     {office}
@@ -195,7 +119,7 @@ const InventoryStatus = () => {
                     {product}
                   </Text>
                   <Text style={[globalStyles.bodyText, styles.third]} numberOfLines={1}>
-                    {stock}개
+                    {quantity}개
                   </Text>
                 </>
               </TouchableHighlight>
@@ -204,9 +128,9 @@ const InventoryStatus = () => {
           ))}
       </ScrollView>
       {isOpenModal && (
-        <ModalWrapper title="제품 상세정보" closeModal={togglePopup}>
-          <CommonTable tableData={dummyTableDataA} />
-          <SumTable tableData={dummyTableDataB} />
+        <ModalWrapper title="제품 상세정보" closeModal={closePopup}>
+          <CommonTable tableData={tableDataA} />
+          <SumTable tableData={tableDataB} />
         </ModalWrapper>
       )}
     </SafeAreaView>

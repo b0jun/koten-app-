@@ -7,7 +7,7 @@ import colors from '~/styles/colors';
 
 interface IRows {
   rowTitle: string;
-  rowValue: string;
+  rowValue: string | undefined;
 }
 interface ITableData {
   title?: string;

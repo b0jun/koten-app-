@@ -6,7 +6,7 @@ import styles from '../styles';
 import colors from '~/styles/colors';
 
 interface IRows {
-  key: number;
+  key: string;
   rowTitle: string;
   rowValue: number;
 }
@@ -21,8 +21,9 @@ interface IProps {
 
 const SumTable = ({ tableData }: IProps) => {
   const sum = tableData.rows.reduce((a, b) => a + b.rowValue, 0);
-  const sumRow = { key: 0, rowTitle: '합계', rowValue: sum };
+  const sumRow = { key: 'sum', rowTitle: '합계', rowValue: sum };
   const tempRows = tableData.rows.concat(sumRow);
+
   return (
     <View style={styles.container}>
       <Text style={styles.tableTitle}>{tableData.title}</Text>
