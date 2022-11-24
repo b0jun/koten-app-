@@ -14,8 +14,6 @@ interface IProps {
 }
 
 const DefaultSection = ({ data }: IProps) => {
-  console.log('DefaultSection:', data);
-
   const dashboardListA: IDashboardList[] = [
     {
       title: '신규접수',

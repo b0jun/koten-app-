@@ -67,21 +67,6 @@ const MyPage = () => {
     },
   ];
 
-  const appInfoOptions = [
-    {
-      title: '버전정보',
-      page: '',
-    },
-    {
-      title: '서비스 이용약관',
-      page: '',
-    },
-    {
-      title: '개인정보 처리방침',
-      page: '',
-    },
-  ];
-
   const myOptions = [
     {
       title: '개인정보 수정',
@@ -118,7 +103,6 @@ const MyPage = () => {
       <SafeAreaView style={styles.bottomSafeArea}>
         <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.scrollView}>
           <Option optionTitle="나의업무" list={defaultOptions} />
-          <Option optionTitle="앱정보" list={appInfoOptions} />
           <Option optionTitle="My" list={myOptions} />
         </ScrollView>
       </SafeAreaView>

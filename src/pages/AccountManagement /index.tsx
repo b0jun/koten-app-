@@ -155,12 +155,12 @@ const AccountManagement = () => {
   return (
     <SafeAreaView edges={['top']} style={globalStyles.flexWithBG}>
       <Header isBack title="정산 관리" isBorder onPressIcon={() => console.log('TEMP')} />
-      <SearchInput
+      {/* <SearchInput
         control={control}
         name="search"
         placeholder="제품명을 입력해주세요."
         onSubmitEditing={handleSubmit(onSearch)}
-      />
+      /> */}
       <View style={globalStyles.head}>
         <Text style={[globalStyles.headText, styles.first]}>거래처명</Text>
         <Text style={[globalStyles.headText, styles.second]}>제품명</Text>

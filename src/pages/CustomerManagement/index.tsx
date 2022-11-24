@@ -173,12 +173,12 @@ const CustomerManagement = () => {
   return (
     <SafeAreaView edges={['top']} style={globalStyles.flexWithBG}>
       <Header isBack title="거래처 관리" isBorder onPressIcon={() => console.log('TEMP')} />
-      <SearchInput
+      {/* <SearchInput
         control={control}
         name="search"
         placeholder="거래처를 입력해주세요."
         onSubmitEditing={handleSubmit(onSearch)}
-      />
+      /> */}
       <View style={globalStyles.head}>
         <Text style={[globalStyles.headText, styles.first]}>거래처명</Text>
         <Text style={[globalStyles.headText, styles.second]}>전화번호</Text>

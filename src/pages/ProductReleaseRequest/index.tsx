@@ -155,12 +155,12 @@ const ProductReleaseRequest = () => {
   return (
     <SafeAreaView edges={['top']} style={globalStyles.flexWithBG}>
       <Header isBack title="제품 출고요청" isBorder onPressIcon={() => console.log('TEMP')} />
-      <SearchInput
+      {/* <SearchInput
         control={control}
         name="search"
         placeholder="제품명을 입력해주세요."
         onSubmitEditing={handleSubmit(onSearch)}
-      />
+      /> */}
       <View style={globalStyles.head}>
         <Text style={[globalStyles.headText, styles.first]}>제품명</Text>
         <Text style={[globalStyles.headText, styles.second]}>요청수량</Text>
